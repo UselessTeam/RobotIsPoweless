@@ -45,6 +45,7 @@ public class SoundHandler : MonoBehaviour {
 		musicPlayer.Play ();
 		} catch (KeyNotFoundException e) {
 			print ("Music " + name + " notfound");
+			e.ToString ();
 		}
 	}
 
@@ -54,6 +55,7 @@ public class SoundHandler : MonoBehaviour {
 			soundPlayers [currentSound].Play ();
 		} catch (KeyNotFoundException e) {
 			print ("Sound " + name + " notfound");
+			e.ToString ();
 		}
 		//soundPlayers [currentSound].PlayOneShot (sounds[name]);
 		currentSound = (currentSound + 1) % NUMBER_SOUNDS;

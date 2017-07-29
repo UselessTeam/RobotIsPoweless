@@ -4,35 +4,39 @@ using UnityEngine;
 
 public class MapHandler : MonoBehaviour {
 
+	static public MapHandler instance;
+	void Awake() {
+		instance = this;
+	}
+
 	public TextAsset file;
 
 
-	private int[] size;
-	private MapItem[,] map;
+	public Position size;
+	public MapItem[,] map;
 
 
 	void Start () {
-		generate ();
+		//generate ();
 	}
 
-	void generate(){
+	public void generate(){
 		MapDictionary.instance.generate();
 		string theWholeFileAsOneLongString = file.text;
 		string[] lines = theWholeFileAsOneLongString.Split('\n');
-		size= new int[2];
-		size [0] = lines.Length;
-		if (size [0] == 0) {
+		size = new Position (lines.Length, 0);
+		if (size.i == 0) {
 			Debug.Log ("Texte vide, map non generee");
 			return;
 		}
-		size [1] = lines [0].Length - ( (size [0]==1)?0:1 );
-		map = new MapItem[size [0],size [1]];
-		for (int i = 0; i < size[0]; i++){
-			if (lines [i].Length - ( (size [0]==i+1)?0:1 ) != size [1]) {
+		size.j = lines [0].Length - ( (size.i==1)?0:1 );
+		map = new MapItem[size.i , size.j];
+		for (int i = 0; i < size.i; i++){
+			if (lines [i].Length - ( (size .i==i+1)?0:1 ) != size.j) {
 				Debug.Log ("Errer dans la map, Lignes non egales, Map non generee");
 				return;
 			}
-			for (int j = 0; j < size[1]; j++){
+			for (int j = 0; j < size.j; j++){
 				char test = lines [i] [j];
 				map [i,j] = MapDictionary.instance.get (test);
 			}
