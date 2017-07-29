@@ -4,25 +4,34 @@ using UnityEngine;
 
 public class MapDictionary : MonoBehaviour {
 	
-	static public Dictionary<char,MapItem> m_Instance;
-	public MapItem[] items;
+	static public MapDictionary m_Instance;
+	static public MapDictionary instance { get { return m_Instance; } }
 
-	static public Dictionary<char,MapItem> charToItem { get { return m_Instance; } }
+	static Dictionary<char,MapItem> charToItem;
+
+	public MapItem[] items;
 
 	void Awake () {
 		if (m_Instance != null) {
 			Destroy (this);
 		} else {
-			m_Instance = new Dictionary<char,MapItem> ();
+			m_Instance = this;
 		}
 	}
 
-	public static void generate() {
+	public void generate() {
+		charToItem = new Dictionary<char,MapItem> ();
 		foreach (MapItem item in this.items) {
-			m_Instance.Add (item.getCode (), item);
+			charToItem.Add (item.code, item);
 		}
-
 	}
+	public MapItem get(char key){
+		MapItem output = null;
+		if( ! charToItem.TryGetValue(key, out output )  )
+			Debug.Log ("Erreur dans la map, character non reconnu : " + key);
+		return output;
+	}
+
 
 	// Use this for initialization
 	void Start () {
