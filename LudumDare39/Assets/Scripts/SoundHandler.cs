@@ -44,7 +44,7 @@ public class SoundHandler : MonoBehaviour {
 		musicPlayer.clip = musics[name];
 		musicPlayer.Play ();
 		} catch (KeyNotFoundException e) {
-			print (name + " notfound");
+			print ("Music " + name + " notfound");
 		}
 	}
 
@@ -53,7 +53,7 @@ public class SoundHandler : MonoBehaviour {
 			soundPlayers [currentSound].clip = sounds[name];
 			soundPlayers [currentSound].Play ();
 		} catch (KeyNotFoundException e) {
-			print (name + " notfound");
+			print ("Sound " + name + " notfound");
 		}
 		//soundPlayers [currentSound].PlayOneShot (sounds[name]);
 		currentSound = (currentSound + 1) % NUMBER_SOUNDS;
