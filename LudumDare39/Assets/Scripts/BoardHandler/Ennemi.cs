@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wall : MapItem {
-	
-	void Awake(){
-	}
+public class NewBehaviourScript : MonoBehaviour {
+
+	// Use this for initialization
 	void Start () {
 		
 	}

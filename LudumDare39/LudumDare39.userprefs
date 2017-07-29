@@ -1,9 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MapHandler.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MapHandler\MapItem.cs">
     <Files>
-      <File FileName="Assets\Scripts\MapHandler.cs" Line="18" Column="3" />
-      <File FileName="Assets\Scripts\MapItem\Wall.cs" Line="7" Column="18" />
+      <File FileName="Assets\Scripts\SoundHandler.cs" Line="52" Column="8" />
+      <File FileName="Assets\Scripts\BoardHandler\BoardHandler.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MapHandler\MapHandler.cs" Line="10" Column="13" />
+      <File FileName="Assets\Scripts\MapHandler\MapDictionary.cs" Line="25" Column="1" />
+      <File FileName="Assets\Scripts\MapHandler\MapItem.cs" Line="9" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
