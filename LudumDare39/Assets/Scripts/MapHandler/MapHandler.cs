@@ -34,7 +34,7 @@ public class MapHandler : MonoBehaviour {
 		size.j = lines [0].Length - ( (size.i==1)?0:1 );
 		map = new MapItem[size.i , size.j];
 		for (int i = 0; i < size.i; i++){
-			if (lines [i].Length - ( (size .i==i+1)?0:1 ) != size.j) {
+			if (lines [i].Length - ( (size.i==i+1)?0:1 ) != size.j) {
 				Debug.Log ("Errer dans la map, Lignes non egales, Map non generee");
 				return;
 			}

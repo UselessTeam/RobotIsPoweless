@@ -4,21 +4,34 @@ using UnityEngine;
 
 public class Ennemi : MonoBehaviour {
 	
-	Position p;
-	List<Position> checkPoints;
+
+	List<Position> checkPoints;//TODO
+	List<Position> chemin;
 
 	void Start () {
+		Position p = this.GetComponent<Movement> ().p;
 		MapHandler.instance.generate ();
-		p = new Position (0, 0);
 		checkPoints = new List<Position> ();
-		MAJChemin (new Position (2, 2));
+		chemin = MAJChemin (p,new Position (2, 2));//TODO
 	}
 
-	List<Position> MAJChemin(Position objectif){
+	public bool Move (){
+		bool output = GetComponent<Movement> ().MoveTo (chemin [0]);
+		chemin.RemoveAt (0);
+		if (chemin [0].Equals(checkPoints[0]) ){
+			Position current = checkPoints [0];
+			checkPoints.RemoveAt (0);
+			checkPoints.Add (current);
+			MAJChemin (current, checkPoints [0]);
+		}
+		return output;
+	}
+
+	List<Position> MAJChemin(Position p, Position objectif){
 		List<Position> cheminOutput = new List<Position>(); 
 
-		int[,] d = BoardHandler.instance.giveEmptyMap (1000);
-		int[,] visited = BoardHandler.instance.giveEmptyMap (0);
+		int[,] d = BoardHandler.instance.GiveEmptyMap (1000);
+		int[,] visited = BoardHandler.instance.GiveEmptyMap (0);
 		Position s = MapHandler.instance.size;
 		Position[,] last = new Position[s.i,s.j];
 		d[p.i,p.j] = 0;
@@ -31,7 +44,7 @@ public class Ennemi : MonoBehaviour {
 			if (visited[u.i,u.j]==0) {
 				visited [u.i,u.j] = 1;
 				foreach (Position v in u.Voisins()) {
-					if (BoardHandler.instance.freeTile (v) && visited[v.i,v.j]==0 ) {
+					if (BoardHandler.instance.FreeTile (v) && visited[v.i,v.j]==0 ) {
 						d [v.i, v.j] = Mathf.Min (d [v.i, v.j], d [u.i, u.j] + 1);
 						Q.Add (v);
 						last [v.i, v.j] = u;
@@ -50,7 +63,6 @@ public class Ennemi : MonoBehaviour {
 				}
 			}
 		}
-		print ("triste");
 		return null; //Bloké
 
 	}

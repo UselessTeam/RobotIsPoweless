@@ -6,26 +6,28 @@ public class BoardHandler : MonoBehaviour {
 
 	static public BoardHandler instance;
 
+	static private Character character;//TODO
+	static private Ennemi[] ennemis;//TODO
+
+
 	void Awake() {
 		instance = this;
 	}
 
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	void NewTurn(){
+		foreach (Ennemi ennemi in ennemis) {
+			ennemi.Move ();
+		}
+		//TODO
 	}
 
-	public bool freeTile(Position u){
+	public bool FreeTile(Position u){
 		if (u.i >= 0 && u.i < MapHandler.instance.size.i && u.j >= 0 && u.j < MapHandler.instance.size.j)
 			return MapHandler.instance.map [u.i, u.j];
 		return false;
 	}
 
-	public int[,] giveEmptyMap(int fill){
+	public int[,] GiveEmptyMap(int fill){
 		Position size= MapHandler.instance.size;
 		int[,] array = new int[size.i,size.j];
 		for (int i = 0; i < size.i; i++)
@@ -56,6 +58,10 @@ public struct Position {
 
 	public bool Equals (Position other){
 		return other.i==i && other.j==j;
+	}
+
+	public bool IsNeighbor( Position other){
+		return Voisins ().Contains (other);
 	}
 
 	public string toString () {

@@ -26,10 +26,10 @@ public class MapLoaderScript {
 		string name = xml.GetAttribute ("name");
 		xml.Read ();
 
-		Debug.Log(xml.Name);
+//		Debug.Log(xml.Name);
 		string wut = xml.ReadInnerXml();
 
-		Debug.Log(wut);
+//		Debug.Log(wut);
 		xml.Skip ();
 	}
 
@@ -79,6 +79,6 @@ public class MapLoaderScript {
 			}
 			xml.Read ();
 		}
-		Debug.Log (tilesets);
+//		Debug.Log (tilesets);
 	}
 }
