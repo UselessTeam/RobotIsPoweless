@@ -1,1 +1,12 @@
-LudumDare39/Temp/
+#Art
+Art/*
+*.kra
+
+#Monodevelop
+*.pidb
+*.userprefs
+
+#Folders
+Temp/*
+Builds/*
+obj/*

@@ -309,6 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   file: {fileID: 4900000, guid: 3b6ad027e025dbb4999b20ed9aadda9e, type: 3}
+  mapName: map_test1
 --- !u!4 &1841528448 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4183273718463194, guid: 609e0d8b2b369f849b509763bc491fff,

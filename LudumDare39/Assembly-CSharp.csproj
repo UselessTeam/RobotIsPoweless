@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Maps\MapLoaderScript.cs" />
      <Compile Include="Assets\Scripts\BoardHandler\BoardHandler.cs" />
      <Compile Include="Assets\Scripts\BoardHandler\Ennemi.cs" />
      <Compile Include="Assets\Scripts\MapHandler\MapDictionary.cs" />
