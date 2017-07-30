@@ -7,8 +7,6 @@ public class MapHandler : MonoBehaviour {
 	static public MapHandler instance;
 	void Awake() {
 		instance = this;
-		MapLoaderScript loader = new MapLoaderScript (mapName);
-		loader.Load ();
 	}
 
 	public TextAsset file;
