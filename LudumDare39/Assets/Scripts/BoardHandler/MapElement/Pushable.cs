@@ -16,7 +16,7 @@ public class Pushable : MapElement {
 //		return false;
 //	}
 
-	new public bool ProcessTurn (){
+	override public bool ProcessTurn (){
 		return true;
 	}
 

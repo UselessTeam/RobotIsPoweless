@@ -7,10 +7,6 @@ public class Character : MapElement {
 	override public bool isFree(){return false;}
 	override public bool isPushable(){return false;}
 
-	// Use this for initialization
-	void Start () {
-		
-	}
 
 	public bool Move (Position destination){
 		bool output = GetComponent<Movement> ().MoveTo (destination);
@@ -25,7 +21,7 @@ public class Character : MapElement {
 		return output;
 	}
 
-	new public bool ProcessTurn (){
+	override public bool ProcessTurn (){
 		return Move (getNextPos (p));
 	}
 

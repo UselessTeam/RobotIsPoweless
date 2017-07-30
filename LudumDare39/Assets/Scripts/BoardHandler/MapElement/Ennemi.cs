@@ -12,7 +12,7 @@ public class Ennemi : MapElement {
 	void Start () {
 	}
 
-	new public bool ProcessTurn (){
+	override public bool ProcessTurn (){
 		bool output = GetComponent<Movement> ().MoveTo (chemin [0]);
 		chemin.RemoveAt (0);
 		if (chemin [0].Equals(checkPoints[0]) ){

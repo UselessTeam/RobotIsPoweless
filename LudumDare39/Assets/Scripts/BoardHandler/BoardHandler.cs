@@ -7,12 +7,12 @@ public class BoardHandler : MonoBehaviour {
 	static public BoardHandler instance;
 
 	public Position size;
-	public bool[,] topographyMap;
+	public bool[,] topographyMap;//Please Initiate
 //	public Pushable[,] pushableTiles;
 	public Dictionary<Position,List<MapElement>> elementAt;
 
 //	private Character character;
-	private MapElement[] mapElements;
+	private MapElement[] mapElements;//Please Initiate
 
 
 
@@ -24,7 +24,7 @@ public class BoardHandler : MonoBehaviour {
 
 	}
 
-	void InitiateDictionary(){
+	void InitiateDictionary(){//Please Initiate
 		elementAt = new Dictionary<Position,List<MapElement>> ();
 		foreach (MapElement element in mapElements) {
 			List<MapElement> elementList;

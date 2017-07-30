@@ -9,10 +9,7 @@ public abstract class MapElement : MonoBehaviour {
 	void Start () {
 		
 	}
-	public bool ProcessTurn(){
-		Debug.Log ("Erreur, la classe abstraite MapElement essaie de jouer son tour");
-		return false;
-	}
+	public abstract bool ProcessTurn ();
 	// Update is called once per frame
 
 	public abstract bool isFree ();
