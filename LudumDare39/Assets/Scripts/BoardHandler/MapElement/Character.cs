@@ -19,8 +19,7 @@ public class Character : MapElement {
 			MapElement element;
 			if (BoardHandler.instance.elementAt.TryGetValue (destination, out element)) {
 				if (element.isPushable ()) {
-					Movement movement = element.GetComponent<Movement> ();
-					movement.MoveTo (getNextPos (movement.p));
+					element.GetComponent<Movement> ().MoveTo (getNextPos (element.p));
 				}
 			}
 		}

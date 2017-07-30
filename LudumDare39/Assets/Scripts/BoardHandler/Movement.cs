@@ -3,22 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Movement : MonoBehaviour {
-	public Position p = new Position(0,0);
 	public bool pushable;
 
 	public bool MoveTo (Position i){
-		if (!p.IsNeighbor (i)) {
+		if (!getPosition ().IsNeighbor (i)) {
 			Debug.Log ("Deplace à une position non adjascente");
 			return false; // Ce false mene a d'autres bugs. Fais gaffe!
 		} else if (BoardHandler.instance.FreeTile (i)) {
-			p = i;
+			setPosition (i);
 			return true;
 		}
 		return false;
 		//TODO
 	}
 
-
+	private Position getPosition (){
+		return GetComponent<MapElement> ().p;
+	}
+	private void setPosition (Position newP){
+		GetComponent<MapElement> ().p = newP;
+	}
 
 
 

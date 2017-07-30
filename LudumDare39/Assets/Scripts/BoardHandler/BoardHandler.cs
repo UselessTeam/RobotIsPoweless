@@ -11,7 +11,7 @@ public class BoardHandler : MonoBehaviour {
 //	public Pushable[,] pushableTiles;//TODO
 	public Dictionary<Position,MapElement> elementAt;
 
-	private Character character;//TODO
+//	private Character character;//TODO
 	private MapElement[] mapElements;//TODO
 
 
@@ -22,6 +22,11 @@ public class BoardHandler : MonoBehaviour {
 
 	void Start(){
 
+	}
+
+	void InitiateDictionary(){
+	//	for mapElements
+		//TODO
 	}
 
 	void NewTurn(){

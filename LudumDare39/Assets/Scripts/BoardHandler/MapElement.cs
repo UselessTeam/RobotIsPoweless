@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class MapElement : MonoBehaviour {
 	// Use this for initialization
+	public Position p; //Please Initiate
+
 	void Start () {
 		
 	}

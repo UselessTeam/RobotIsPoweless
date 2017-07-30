@@ -6,14 +6,10 @@ public class Ennemi : MapElement {
 	override public bool isFree(){return false;}
 	override public bool isPushable(){return false;}
 
-	List<Position> checkPoints;//TODO
+	List<Position> checkPoints;//Please Initiate
 	List<Position> chemin;
 
 	void Start () {
-		Position p = this.GetComponent<Movement> ().p;
-		MapHandler.instance.generate ();//TODO
-		checkPoints = new List<Position> ();
-		chemin = MAJChemin (p,new Position (2, 2));//TODO
 	}
 
 	new public bool ProcessTurn (){
