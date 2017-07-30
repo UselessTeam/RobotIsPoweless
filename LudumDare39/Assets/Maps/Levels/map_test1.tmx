@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="24" nextobjectid="78">
- <tileset firstgid="1" source="../tilesets/main.tsx"/>
- <tileset firstgid="65" source="../tilesets/logic.tsx"/>
- <tileset firstgid="129" source="../tilesets/decorations.tsx"/>
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="24" nextobjectid="81">
+ <tileset firstgid="1" source="../Tilesheets/main.tsx"/>
+ <tileset firstgid="65" source="../Tilesheets/logic.tsx"/>
+ <tileset firstgid="129" source="../Tilesheets/decorations.tsx"/>
  <layer name="Bottom" width="20" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -52,6 +52,9 @@
 </data>
  </layer>
  <objectgroup name="Link">
+  <properties>
+   <property name="type" value="wire"/>
+  </properties>
   <object id="12" gid="98" x="384" y="384" width="32" height="24"/>
   <object id="14" gid="117" x="416" y="384" width="32" height="24"/>
   <object id="15" gid="117" x="448" y="384" width="32" height="24"/>
@@ -64,15 +67,18 @@
   <object id="22" gid="118" x="576" y="312" width="32" height="24"/>
   <object id="23" gid="118" x="576" y="288" width="32" height="24"/>
   <object id="24" gid="118" x="576" y="264" width="32" height="24"/>
-  <object id="26" gid="78" x="384" y="384" width="32" height="24"/>
+  <object id="26" type="button" gid="78" x="384" y="384" width="32" height="24"/>
   <object id="27" gid="105" x="576" y="240" width="32" height="24"/>
-  <object id="28" gid="125" x="576" y="240" width="32" height="24">
+  <object id="28" type="pillar" gid="125" x="576" y="240" width="32" height="24">
    <properties>
     <property name="activated" type="bool" value="true"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup name="Link">
+  <properties>
+   <property name="type" value="wire"/>
+  </properties>
   <object id="46" gid="105" x="416" y="72" width="32" height="24"/>
   <object id="47" gid="118" x="416" y="96" width="32" height="24"/>
   <object id="48" gid="118" x="416" y="120" width="32" height="24"/>
@@ -96,14 +102,17 @@
   <object id="68" gid="117" x="448" y="288" width="32" height="24"/>
   <object id="69" gid="117" x="448" y="192" width="32" height="24"/>
   <object id="70" gid="117" x="384" y="192" width="32" height="24"/>
-  <object id="71" gid="125" x="384" y="336" width="32" height="24">
+  <object id="71" type="pillar" gid="125" x="384" y="336" width="32" height="24">
    <properties>
     <property name="activated" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="72" gid="78" x="416" y="72" width="32" height="24"/>
+  <object id="72" type="button+" gid="78" x="416" y="72" width="32" height="24"/>
  </objectgroup>
  <objectgroup name="Power">
+  <properties>
+   <property name="type" value="power"/>
+  </properties>
   <object id="29" gid="65" x="32" y="312" width="32" height="24"/>
   <object id="30" gid="65" x="160" y="312" width="32" height="24"/>
   <object id="31" gid="65" x="160" y="384" width="32" height="24"/>
@@ -121,6 +130,16 @@
   <object id="43" gid="81" x="384" y="240" width="32" height="24"/>
   <object id="44" gid="81" x="448" y="240" width="32" height="24"/>
   <object id="76" gid="65" x="96" y="456" width="32" height="24"/>
+ </objectgroup>
+ <objectgroup name="Ennemies">
+  <properties>
+   <property name="type" value="ennemy"/>
+  </properties>
+  <object id="79" gid="64" x="96" y="312" width="32" height="24">
+   <properties>
+    <property name="path" value="(5,12)-(5,9)-(1,9)-(1,12)"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="Top" width="20" height="20">
   <data encoding="csv">

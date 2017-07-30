@@ -158,6 +158,19 @@ public class MapLoaderScript : MonoBehaviour {
 	private void CreateLogic(Transform logic, string type, int gid, int i, int j, Dictionary<string,string> properties){
 		GameObject tile;
 		switch (type) {
+		case "ennemy": //And ennemy
+			string[] strPositions = properties ["path"].Split ('-');
+			Position[] positions = new Position[strPositions.Length];
+			for (int k = 0; k < strPositions.Length; k++) {
+				string[] strPair = strPositions [k].Substring (1, strPositions [k].Length - 2).Split (',');
+				positions [k] = new Position (int.Parse (strPair [1]), int.Parse (strPair [0]));
+			}
+			tile = CreateTile (GetItem (gid).sprite, logic, i, j);
+			break;
+		case "power": //The thing that gives you back energy
+		case "button+": //Button
+		case "pillar": //The thing that comes out of the ground and acts like a wall when it's activated 
+		case "wire": //The blue thing on the ground
 		case "default":
 		default:
 			tile = CreateTile (GetItem (gid).sprite, logic, i, j); //Initialize Logic Item
@@ -166,8 +179,21 @@ public class MapLoaderScript : MonoBehaviour {
 		tile.name = type + String.Format("({0},{1})",i,j);
 	}
 
+	private void UpdateProperties(ref Dictionary<string,string> properties){
+		NextContent ();//First property
+		while (xml.NodeType != XmlNodeType.EndElement) {
+			string proprietyName = xml.GetAttribute ("name");
+			string proprietyValue = xml.GetAttribute ("value");
+			properties [proprietyName] = proprietyValue;
+			NextContent ();//Next property
+		}
+	}
+
 	private void LoadObjects(){
 		string name = xml.GetAttribute ("name");
+		Dictionary<string,string> groupProperties = new Dictionary<string,string> ();
+		groupProperties ["type"] = "default";
+
 		Transform layer = transform.Find ("Entities");
 		GameObject logic;
 		if (name == "Link") {
@@ -177,32 +203,27 @@ public class MapLoaderScript : MonoBehaviour {
 		}
 		logic.name = name;
 		NextContent ();
+		//NextContent ();
 		while (xml.NodeType!=XmlNodeType.EndElement) {
-			string type = xml.GetAttribute("type");
-			if(type==""){
-				type="default";
-			}
-			Dictionary<string,string> properties = new Dictionary<string,string>();
-			int i = int.Parse (xml.GetAttribute ("y")) / 24 - 1;
-			int j = int.Parse (xml.GetAttribute ("x")) / 32;
-			int gid = int.Parse (xml.GetAttribute ("gid"));
-			//If has properties
-			if (!xml.IsEmptyElement) {
-				xml.ReadToDescendant ("properties");
-				NextContent ();//First property
-				while (xml.NodeType != XmlNodeType.EndElement) {
-					string proprietyName = xml.GetAttribute ("name");
-					string proprietyValue = xml.GetAttribute ("value");
-					if (proprietyName == "type") {
-						type = proprietyValue;
-					} else {
-						properties [proprietyName] = proprietyValue;
-					}
-					NextContent ();//Next property
+			if (xml.Name == "properties") {
+				UpdateProperties (ref groupProperties);
+			} else if (xml.Name == "object") {
+				string type = xml.GetAttribute("type");
+				if(type==null || type==""){
+					type=groupProperties ["type"];
 				}
-				NextContent ();//Exit properties
+				Dictionary<string,string> properties = new Dictionary<string,string>();
+				int i = int.Parse (xml.GetAttribute ("y")) / 24 - 1;
+				int j = int.Parse (xml.GetAttribute ("x")) / 32;
+				int gid = int.Parse (xml.GetAttribute ("gid"));
+				//If has properties
+				if (!xml.IsEmptyElement) {
+					xml.ReadToDescendant ("properties");
+					UpdateProperties (ref properties);
+					NextContent ();//Exit properties
+				}
+				CreateLogic (logic.transform, type, gid, i, j, properties);
 			}
-			CreateLogic (logic.transform, type, gid, i, j, properties);
 			NextContent ();//Next logic element
 		}
 		//Finishes on end element
