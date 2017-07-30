@@ -6,29 +6,48 @@ public class BoardHandler : MonoBehaviour {
 
 	static public BoardHandler instance;
 
-	static private Character character;//TODO
-	static private Ennemi[] ennemis;//TODO
+	public Position size;
+	public bool[,] topographyMap;//TODO
+//	public Pushable[,] pushableTiles;//TODO
+	public Dictionary<Position,MapElement> elementAt;
+
+	private Character character;//TODO
+	private MapElement[] mapElements;//TODO
+
 
 
 	void Awake() {
 		instance = this;
 	}
 
+	void Start(){
+
+	}
+
 	void NewTurn(){
-		foreach (Ennemi ennemi in ennemis) {
-			ennemi.Move ();
+		foreach (MapElement element in mapElements) {
+			element.ProcessTurn ();
 		}
 		//TODO
 	}
 
 	public bool FreeTile(Position u){
-		if (u.i >= 0 && u.i < MapHandler.instance.size.i && u.j >= 0 && u.j < MapHandler.instance.size.j)
-			return MapHandler.instance.map [u.i, u.j];
+		if (u.i >= 0 && u.i < size.i && u.j >= 0 && u.j < size.j) {
+			MapElement element;
+			if (elementAt.TryGetValue (u, out element)) {
+				return 	topographyMap [u.i, u.j] && element.isFree();
+			}
+			return 	topographyMap [u.i, u.j];
+		}
 		return false;
 	}
+//	public bool PushableTile(Position u){
+//		if (u.i >= 0 && u.i < size.i && u.j >= 0 && u.j < size.j)
+//			return pushableTiles [u.i, u.j];
+//		return false;
+//	}
 
 	public int[,] GiveEmptyMap(int fill){
-		Position size= MapHandler.instance.size;
 		int[,] array = new int[size.i,size.j];
 		for (int i = 0; i < size.i; i++)
 			for (int j = 0; j < size.j; j++)

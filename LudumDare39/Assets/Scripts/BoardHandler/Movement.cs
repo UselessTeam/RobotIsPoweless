@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour {
 	public Position p = new Position(0,0);
+	public bool pushable;
 
 	public bool MoveTo (Position i){
 		if (!p.IsNeighbor (i)) {
@@ -16,6 +17,8 @@ public class Movement : MonoBehaviour {
 		return false;
 		//TODO
 	}
+
+
 
 
 

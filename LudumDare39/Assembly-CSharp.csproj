@@ -53,8 +53,11 @@
   <ItemGroup>
      <Compile Include="Assets\Maps\MapLoaderScript.cs" />
      <Compile Include="Assets\Scripts\BoardHandler\BoardHandler.cs" />
-     <Compile Include="Assets\Scripts\BoardHandler\Character.cs" />
-     <Compile Include="Assets\Scripts\BoardHandler\Ennemi.cs" />
+     <Compile Include="Assets\Scripts\BoardHandler\InputHandler.cs" />
+     <Compile Include="Assets\Scripts\BoardHandler\MapElement.cs" />
+     <Compile Include="Assets\Scripts\BoardHandler\MapElement\Character.cs" />
+     <Compile Include="Assets\Scripts\BoardHandler\MapElement\Ennemi.cs" />
+     <Compile Include="Assets\Scripts\BoardHandler\MapElement\Pushable.cs" />
      <Compile Include="Assets\Scripts\BoardHandler\Movement.cs" />
      <Compile Include="Assets\Scripts\MapHandler\MapDictionary.cs" />
      <Compile Include="Assets\Scripts\MapHandler\MapHandler.cs" />

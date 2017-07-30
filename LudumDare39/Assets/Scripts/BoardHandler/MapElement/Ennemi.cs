@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ennemi : MonoBehaviour {
-	
+public class Ennemi : MapElement {
+	override public bool isFree(){return false;}
+	override public bool isPushable(){return false;}
 
 	List<Position> checkPoints;//TODO
 	List<Position> chemin;
 
 	void Start () {
 		Position p = this.GetComponent<Movement> ().p;
-		MapHandler.instance.generate ();
+		MapHandler.instance.generate ();//TODO
 		checkPoints = new List<Position> ();
 		chemin = MAJChemin (p,new Position (2, 2));//TODO
 	}
 
-	public bool Move (){
+	new public bool ProcessTurn (){
 		bool output = GetComponent<Movement> ().MoveTo (chemin [0]);
 		chemin.RemoveAt (0);
 		if (chemin [0].Equals(checkPoints[0]) ){
@@ -32,7 +33,7 @@ public class Ennemi : MonoBehaviour {
 
 		int[,] d = BoardHandler.instance.GiveEmptyMap (1000);
 		int[,] visited = BoardHandler.instance.GiveEmptyMap (0);
-		Position s = MapHandler.instance.size;
+		Position s = BoardHandler.instance.size;
 		Position[,] last = new Position[s.i,s.j];
 		d[p.i,p.j] = 0;
 
