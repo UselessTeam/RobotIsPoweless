@@ -1,5 +1,5 @@
 #Art
-Art/*
+Art/
 *.kra
 
 #Monodevelop
@@ -7,6 +7,6 @@ Art/*
 *.userprefs
 
 #Folders
-Temp/*
-Builds/*
-obj/*
+Temp/
+Builds/
+obj/
