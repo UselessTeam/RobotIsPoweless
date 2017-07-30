@@ -16,16 +16,15 @@ public class MapLoaderScript : MonoBehaviour {
 	[Serializable]
 	public class TileSheet {
 		public string name;
+		[HideInInspector]
 		public int start;
-		public int height;
-		public int width;
 
 		public bool[] blockings;
 		public bool[] passages;
 		public Sprite[] sprites;
 
 		public Item GetItem(int i){
-			int j = i;//(i % height) * width + (i / height);
+			int j = i;
 			Item item;
 			item.blocking = j<blockings.Length ? blockings [j] : false ;
 			item.passage = j<passages.Length ? passages [j] : false ;
@@ -98,8 +97,10 @@ public class MapLoaderScript : MonoBehaviour {
 				}
 				Item item = GetItem (value);
 
-				GameObject tile = Instantiate (basicTile, new Vector3 (32*j,-24*i,i), Quaternion.identity, layer);
-				tile.GetComponent<SpriteRenderer> ().sprite = item.sprite;
+				GameObject tile = Instantiate (basicTile, new Vector3 (32*j,-24*i,0), Quaternion.identity, layer);
+				SpriteRenderer sr = tile.GetComponent<SpriteRenderer> ();
+				sr.sprite = item.sprite;
+				sr.sortingOrder = i + (int)(layer.position.z);
 				logicMap [i, j] = !item.blocking && (item.passage || logicMap [i, j]);
 				imap [i, j] = value;
 			}
