@@ -14,21 +14,23 @@ public class MapLoaderScript : MonoBehaviour {
 	}
 
 	[Serializable]
+	public class IntSet : List<int> {};
+
+	[Serializable]
 	public class TileSheet {
 		public string name;
 		[HideInInspector]
 		public int start;
 
-		public bool[] blockings;
-		public bool[] passages;
+		public int[] blockings;
+		public int[] passages;
 		public Sprite[] sprites;
 
 		public Item GetItem(int i){
-			int j = i;
 			Item item;
-			item.blocking = j<blockings.Length ? blockings [j] : false ;
-			item.passage = j<passages.Length ? passages [j] : false ;
-			item.sprite = j<sprites.Length ? sprites [j] : null;
+			item.blocking = blockings.Contains(i);
+			item.passage = passages.Contains(i);
+			item.sprite = i<sprites.Length ? sprites [i] : null;
 			return item;
 		}
 	}
@@ -97,18 +99,24 @@ public class MapLoaderScript : MonoBehaviour {
 				}
 				Item item = GetItem (value);
 
-				GameObject tile = Instantiate (basicTile, new Vector3 (32*j,-24*i,0), Quaternion.identity, layer);
-				SpriteRenderer sr = tile.GetComponent<SpriteRenderer> ();
-				sr.sprite = item.sprite;
-				sr.sortingOrder = i + (int)(layer.position.z);
+				GameObject tile = CreateTile (item.sprite, layer, i, j);
+				tile.name = name + String.Format("({0},{1})",i,j);
 				logicMap [i, j] = !item.blocking && (item.passage || logicMap [i, j]);
 				imap [i, j] = value;
 			}
 		}
-
-
-
 		xml.Skip ();
+	}
+
+	public GameObject CreateTile(Sprite sprite, Transform parent, int i, int j, int push=0, GameObject model = null){
+		if (model == null) {
+			model = basicTile;
+		}
+		GameObject tile = Instantiate (model, new Vector3 (j, -0.75f * i, i + push), Quaternion.identity, parent);
+		SpriteRenderer sr = tile.GetComponent<SpriteRenderer> ();
+		sr.sprite = sprite;
+		sr.sortingOrder = i + (int)(parent.position.z) + push;
+		return tile;
 	}
 
 	private void LoadDimentions(){
@@ -133,8 +141,92 @@ public class MapLoaderScript : MonoBehaviour {
 		tilesheetNamed(name).start = value;
 	}
 
+	private bool NextContent(){
+		if (!xml.Read ()) {
+			return false;
+		}
+		xml.MoveToContent ();
+		return true;
+	}
+		
+	//VERY IMPORTANT TODO 
+	private GameObject CreateLink(Transform layer){
+		GameObject link = CreateTile (null,layer,0,0,2); //Initialize Logic Link
+		return link;
+	}
+
+	private void CreateLogic(Transform logic, string type, int gid, int i, int j, Dictionary<string,string> properties){
+		GameObject tile;
+		switch (type) {
+		case "ennemy": //And ennemy
+			string[] strPositions = properties ["path"].Split ('-');
+			Position[] positions = new Position[strPositions.Length];
+			for (int k = 0; k < strPositions.Length; k++) {
+				string[] strPair = strPositions [k].Substring (1, strPositions [k].Length - 2).Split (',');
+				positions [k] = new Position (int.Parse (strPair [1]), int.Parse (strPair [0]));
+			}
+			tile = CreateTile (GetItem (gid).sprite, logic, i, j);
+			break;
+		case "power": //The thing that gives you back energy
+		case "button+": //Button
+		case "pillar": //The thing that comes out of the ground and acts like a wall when it's activated 
+		case "wire": //The blue thing on the ground
+		case "default":
+		default:
+			tile = CreateTile (GetItem (gid).sprite, logic, i, j); //Initialize Logic Item
+			break;
+		}
+		tile.name = type + String.Format("({0},{1})",i,j);
+	}
+
+	private void UpdateProperties(ref Dictionary<string,string> properties){
+		NextContent ();//First property
+		while (xml.NodeType != XmlNodeType.EndElement) {
+			string proprietyName = xml.GetAttribute ("name");
+			string proprietyValue = xml.GetAttribute ("value");
+			properties [proprietyName] = proprietyValue;
+			NextContent ();//Next property
+		}
+	}
+
 	private void LoadObjects(){
-		xml.Skip ();
+		string name = xml.GetAttribute ("name");
+		Dictionary<string,string> groupProperties = new Dictionary<string,string> ();
+		groupProperties ["type"] = "default";
+
+		Transform layer = transform.Find ("Entities");
+		GameObject logic;
+		if (name == "Link") {
+			logic = CreateLink (layer);
+		} else {
+			logic = CreateTile (null,layer,0,0,2);
+		}
+		logic.name = name;
+		NextContent ();
+		//NextContent ();
+		while (xml.NodeType!=XmlNodeType.EndElement) {
+			if (xml.Name == "properties") {
+				UpdateProperties (ref groupProperties);
+			} else if (xml.Name == "object") {
+				string type = xml.GetAttribute("type");
+				if(type==null || type==""){
+					type=groupProperties ["type"];
+				}
+				Dictionary<string,string> properties = new Dictionary<string,string>();
+				int i = int.Parse (xml.GetAttribute ("y")) / 24 - 1;
+				int j = int.Parse (xml.GetAttribute ("x")) / 32;
+				int gid = int.Parse (xml.GetAttribute ("gid"));
+				//If has properties
+				if (!xml.IsEmptyElement) {
+					xml.ReadToDescendant ("properties");
+					UpdateProperties (ref properties);
+					NextContent ();//Exit properties
+				}
+				CreateLogic (logic.transform, type, gid, i, j, properties);
+			}
+			NextContent ();//Next logic element
+		}
+		//Finishes on end element
 	}
 
 	public void Load(string tmxName){
@@ -142,12 +234,10 @@ public class MapLoaderScript : MonoBehaviour {
 		xml = XmlReader.Create (tmxName);
 
 		int n = 0;
+		xml.MoveToContent ();
 		while (!xml.EOF && n<1000) {
 			n++;
-			if (!xml.IsStartElement ()) {
-				continue;
-			}
-			switch (xml.LocalName.ToLower ()) {
+			switch (xml.Name.ToLower ()) {
 			case "map":
 				LoadDimentions ();
 				break;
@@ -162,11 +252,13 @@ public class MapLoaderScript : MonoBehaviour {
 				break;
 			default :
 				Debug.LogWarningFormat ("Error loading map line {0}", xml.LocalName);
-				xml.Skip ();
+				NextContent ();
 				break;
 			}
-			xml.Read ();
+			do {
+				NextContent ();
+			} while (xml.NodeType == XmlNodeType.EndElement);
 		}
-		Debug.Log (tilesheets);
+		Debug.Log (n);
 	}
 }
