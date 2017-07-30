@@ -14,16 +14,11 @@ public class Pushable : MapElement {
 //	//		return GetComponent<Movement>().MoveTo();
 //		}
 //		return false;
-//		//TODO
 //	}
 
 	new public bool ProcessTurn (){
 		return true;
 	}
 
-	public Position nextPosition(Position p){
-		//TODO (get it from the input handler
-		return new Position(0,0);
-	}
 		
 }

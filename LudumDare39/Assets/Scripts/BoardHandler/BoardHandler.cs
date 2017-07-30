@@ -7,12 +7,12 @@ public class BoardHandler : MonoBehaviour {
 	static public BoardHandler instance;
 
 	public Position size;
-	public bool[,] topographyMap;//TODO
-//	public Pushable[,] pushableTiles;//TODO
-	public Dictionary<Position,MapElement> elementAt;
+	public bool[,] topographyMap;
+//	public Pushable[,] pushableTiles;
+	public Dictionary<Position,List<MapElement>> elementAt;
 
-//	private Character character;//TODO
-	private MapElement[] mapElements;//TODO
+//	private Character character;
+	private MapElement[] mapElements;
 
 
 
@@ -25,27 +25,60 @@ public class BoardHandler : MonoBehaviour {
 	}
 
 	void InitiateDictionary(){
-	//	for mapElements
-		//TODO
+		elementAt = new Dictionary<Position,List<MapElement>> ();
+		foreach (MapElement element in mapElements) {
+			List<MapElement> elementList;
+			if ( elementAt.TryGetValue(element.p , out elementList) ) {
+				elementList.Add (element);
+			} else {
+				elementList = new List<MapElement> ();
+				elementList.Add (element);
+				elementAt.Add (element.p, elementList);
+			}
+		}
 	}
 
-	void NewTurn(){
+	public void NewTurn(){
 		foreach (MapElement element in mapElements) {
 			element.ProcessTurn ();
 		}
 		//TODO
 	}
 
-	public bool FreeTile(Position u){
+	public bool FreeTile(Position u){ 	//0 means not accessible	//1 means pushable	//2 means free!
 		if (u.i >= 0 && u.i < size.i && u.j >= 0 && u.j < size.j) {
-			MapElement element;
-			if (elementAt.TryGetValue (u, out element)) {
-				return 	topographyMap [u.i, u.j] && element.isFree();
+			List<MapElement> elementList;
+			bool free = true;
+			if (elementAt.TryGetValue (u, out elementList)) {
+				while (elementList.Count > 0 && free) {
+					free = free && elementList [0].isFree ();
+					elementList.RemoveAt (0);
+				}
 			}
-			return 	topographyMap [u.i, u.j];
+			return 	( topographyMap [u.i, u.j] && free );
 		}
 		return false;
 	}
+
+	public Pushable PushableTile(Position u){ 	//0 means not accessible	//1 means pushable	//2 means free!
+		Pushable output = null;
+		if (u.i >= 0 && u.i < size.i && u.j >= 0 && u.j < size.j) {
+			List<MapElement> elementList;
+			bool pushable = false;
+			if (elementAt.TryGetValue (u, out elementList)) {
+				while (elementList.Count > 0 && !pushable) {
+					if (elementList [0].isPushable ()) {
+						pushable = true;
+						output = elementList [0].GetComponent<Pushable>();
+					}
+					elementList.RemoveAt (0);
+				}
+			}
+		}
+		return output;
+		//TODO
+	}
+		
 //	public bool PushableTile(Position u){
 //		if (u.i >= 0 && u.i < size.i && u.j >= 0 && u.j < size.j)
 //			return pushableTiles [u.i, u.j];
@@ -86,6 +119,10 @@ public struct Position {
 
 	public bool IsNeighbor( Position other){
 		return Voisins ().Contains (other);
+	}
+
+	public Position Add (Position other){
+		return new Position (i + other.i, j + other.j);
 	}
 
 	public string toString () {

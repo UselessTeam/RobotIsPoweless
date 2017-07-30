@@ -7,14 +7,13 @@ public class Movement : MonoBehaviour {
 
 	public bool MoveTo (Position i){
 		if (!getPosition ().IsNeighbor (i)) {
-			Debug.Log ("Deplace à une position non adjascente");
+			Debug.Log ("Nope! Deplacé à une position non adjascente");
 			return false; // Ce false mene a d'autres bugs. Fais gaffe!
 		} else if (BoardHandler.instance.FreeTile (i)) {
 			setPosition (i);
 			return true;
 		}
 		return false;
-		//TODO
 	}
 
 	private Position getPosition (){

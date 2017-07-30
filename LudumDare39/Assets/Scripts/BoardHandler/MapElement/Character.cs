@@ -16,21 +16,20 @@ public class Character : MapElement {
 		bool output = GetComponent<Movement> ().MoveTo (destination);
 		if (!output) {
 			//Try to PUSH
-			MapElement element;
-			if (BoardHandler.instance.elementAt.TryGetValue (destination, out element)) {
-				if (element.isPushable ()) {
-					element.GetComponent<Movement> ().MoveTo (getNextPos (element.p));
-				}
+			Pushable element = BoardHandler.instance.PushableTile(destination);
+			if (! (element == null) ) {
+				element.GetComponent<Movement> ().MoveTo (getNextPos (element.p));
 			}
+
 		}
 		return output;
 	}
 
 	new public bool ProcessTurn (){
-		return true;
+		return Move (getNextPos (p));
 	}
 
 	Position getNextPos(Position p){
-		return p; //TODO
+		return p.Add( InputHandler.instance.direction );
 	}
 }
