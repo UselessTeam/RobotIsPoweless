@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\InputHandler.cs" />
      <Compile Include="Assets\Scripts\MapElement\Character.cs" />
      <Compile Include="Assets\Scripts\MapElement\Ennemi.cs" />
+     <Compile Include="Assets\Scripts\MapElement\LevelEnd.cs" />
      <Compile Include="Assets\Scripts\MapElement\LogicButton.cs" />
      <Compile Include="Assets\Scripts\MapElement\LogicDoor.cs" />
      <Compile Include="Assets\Scripts\MapElement\LogicLink.cs" />

@@ -16,19 +16,20 @@ public class BoardHandler : MonoBehaviour {
 //	private Character character;
 	private MapElement[] mapElements;
 
+	public int level = 0;
 
 
 	void Awake() {
 		instance = this;
-		mapLoader.Load ("map_test1");
-		topographyMap = mapLoader.logicMap;
-		size = new Position (mapLoader.height, mapLoader.width);
-		mapElements = mapLoader.entities.ToArray();
-		InitiateDictionary ();
+		LoadLevel ("map_test1");
 	}
 
-	void Start(){
-
+	public void LoadLevel(string str){
+		mapLoader.Load (str);
+		topographyMap = mapLoader.logicMap;
+		size = new Position (mapLoader.height, mapLoader.width);
+		mapElements = mapLoader.entities.ToArray ();
+		InitiateDictionary ();
 	}
 
 	void InitiateDictionary(){
@@ -52,14 +53,15 @@ public class BoardHandler : MonoBehaviour {
 		//TODO
 	}
 
-	public bool FreeTile(Position u){ 	//0 means not accessible	//1 means pushable	//2 means free!
+	public bool FreeTile(Position u){ 
 		if (u.i >= 0 && u.i < size.i && u.j >= 0 && u.j < size.j) {
 			List<MapElement> elementList;
 			bool free = true;
 			if (elementAt.TryGetValue (u, out elementList)) {
-				while (elementList.Count > 0 && free) {
-					free = free && elementList [0].isFree ();
-					elementList.RemoveAt (0);
+				foreach (MapElement el in elementList) {
+					free = free && el.isFree ();
+				}
+				if (elementList.Count == 2) {
 				}
 			}
 			return 	( topographyMap [u.i, u.j] && free );
@@ -67,23 +69,53 @@ public class BoardHandler : MonoBehaviour {
 		return false;
 	}
 
+	public void Move(MapElement element, Position newPos){
+		//First Remove
+		List<MapElement> elementList;
+		if (!elementAt.TryGetValue (element.p, out elementList)) {
+			Debug.Log ("Probleme, l'objet à deplacer etait a une position vide");
+		}else if(!elementList.Contains(element)){
+			Debug.Log ("Probleme, l'objet à deplacer n'y etait pas");
+		}
+		elementList.Remove (element);
+		//THen ADD at the new position
+		if ( elementAt.TryGetValue(newPos , out elementList) ) {
+			elementList.Add (element);
+		} else {
+			elementList = new List<MapElement> ();
+			elementList.Add (element);
+			elementAt.Add (newPos, elementList);
+		}
+
+	}
+
 	public Pushable PushableTile(Position u){ 	//0 means not accessible	//1 means pushable	//2 means free!
 		Pushable output = null;
 		if (u.i >= 0 && u.i < size.i && u.j >= 0 && u.j < size.j) {
 			List<MapElement> elementList;
-			bool pushable = false;
 			if (elementAt.TryGetValue (u, out elementList)) {
-				while (elementList.Count > 0 && !pushable) {
+				foreach (MapElement el in elementList) {
 					if (elementList [0].isPushable ()) {
-						pushable = true;
 						output = elementList [0].GetComponent<Pushable>();
 					}
-					elementList.RemoveAt (0);
 				}
 			}
 		}
 		return output;
 		//TODO
+	}
+
+	public bool IsThere (string type, Position u){
+		List<MapElement> elementList;
+		bool power = false;;
+		if (elementAt.TryGetValue (u, out elementList)) {
+			foreach (MapElement el in elementList) {
+				power = power || el.name.Contains(type);
+			}
+			return power;
+		}
+		return false;
+
 	}
 		
 //	public bool PushableTile(Position u){

@@ -165,6 +165,8 @@ public class MapLoaderScript : MonoBehaviour {
 		switch (type) {
 		case "character":
 			tile = CreateTile (GetItem (gid).sprite, logicLink, i, j, 0, mapElementPrefabs [0]);
+			Character character = tile.GetComponent<Character>();
+			character.levelEndLink = logicLink.GetComponent<LogicLink> ();
 			break;
 		case "ennemy": //And ennemy
 			string[] strPositions = properties ["path"].Split ('-');
@@ -198,6 +200,11 @@ public class MapLoaderScript : MonoBehaviour {
 		case "pushable": //The blue thing on the ground
 			tile = CreateTile (GetItem (gid).sprite, logicLink, i, j, 0, mapElementPrefabs [6]);
 			break;
+		case "exit": //The blue thing on the ground
+			tile = CreateTile (GetItem (gid).sprite, logicLink, i, j, 0, mapElementPrefabs [7]);
+			LogicLink test = logicLink.GetComponent<LogicLink> ();
+			logicLink.GetComponent<LogicLink> ().itemPosition = new Position(i,j);
+			break;
 		case "default":
 		default:
 			tile = CreateTile (GetItem (gid).sprite, logicLink, i, j); //Initialize Logic Item
@@ -227,11 +234,11 @@ public class MapLoaderScript : MonoBehaviour {
 
 		Transform layer = transform.Find ("Entities");
 		GameObject logic;
-		if (name == "Link") {
+//		if (name == "Link") {
 			logic = CreateLink (layer);
-		} else {
-			logic = CreateTile (null,layer,0,0,2);
-		}
+//		} else {
+//			logic = CreateTile (null,layer,0,0,2);
+//		}
 		logic.name = name;
 		NextContent ();
 		//NextContent ();
@@ -261,6 +268,7 @@ public class MapLoaderScript : MonoBehaviour {
 	}
 
 	public void Load(string tmxName){
+		ResetLevel ();
 		tmxName = Application.dataPath + "/Maps/Levels/" + tmxName + ".tmx";
 		xml = XmlReader.Create (tmxName);
 
@@ -291,4 +299,14 @@ public class MapLoaderScript : MonoBehaviour {
 			} while (xml.NodeType == XmlNodeType.EndElement);
 		}
 	}
+
+	public void ResetLevel(){
+		foreach (Transform child in transform) {
+			foreach (Transform link in child.transform) {
+				Destroy (link.gameObject);
+			}
+		}
+	}
+
+
 }

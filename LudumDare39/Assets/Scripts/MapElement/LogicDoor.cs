@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class LogicDoor : MapElement {
 
-	override public bool isFree(){return false;}
+	bool closed = false;
+	bool previousState = false;
+
+	override public bool isFree(){return !closed;}
 	override public bool isPushable(){return true;}
 
 	public LogicLink link;
 
 	override public bool ProcessTurn (){
-		//TODO
+		closed = link.IsActive();
+		//it (previousState != closed) TODO afficher le changement d'etat Vas y quentin!!!
+		previousState = closed;
 		return true;
 	}
 

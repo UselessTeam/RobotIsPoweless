@@ -1,21 +1,23 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\BoardHandler\InputHandler.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\BoardHandler.cs">
     <Files>
-      <File FileName="Assets\Scripts\BoardHandler\BoardHandler.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\BoardHandler\MapElement.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\BoardHandler.cs" Line="64" Column="1" />
+      <File FileName="Assets\Scripts\Movement.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MapElement\Character.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MapElement\LogicLink.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MapElement\LogicButton.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MapElement\LogicDoor.cs" Line="1" Column="1" />
       <File FileName="Assets\Maps\MapLoaderScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\BoardHandler\MapElement\LogicLink.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\BoardHandler\MapElement\LogicButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\BoardHandler\MapElement\Character.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\BoardHandler\MapElement\Wire.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\BoardHandler\InputHandler.cs" Line="46" Column="1" />
-      <File FileName="Assets\Scripts\BoardHandler\MapElement\LogicDoor.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MapElement\Ennemi.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="C:\Users\Hédi\Desktop\Travail\Unity Projects\LudumDare39\LudumDare39\Assets\Scripts\BoardHandler\InputHandler.cs" line="46" column="1" />
+      <Breakpoint file="C:\Users\Hédi\Desktop\Travail\Unity Projects\LudumDare39\LudumDare39\Assets\Scripts\BoardHandler\MapElement\Ennemi.cs" line="20" column="1" />
+      <Breakpoint file="C:\Users\Hédi\Desktop\Travail\Unity Projects\LudumDare39\LudumDare39\Assets\Scripts\BoardHandler\MapElement\Ennemi.cs" line="21" column="1" />
+      <Breakpoint file="C:\Users\Hédi\Desktop\Travail\Unity Projects\LudumDare39\LudumDare39\Assets\Scripts\BoardHandler.cs" line="57" column="1" />
+      <Breakpoint file="C:\Users\Hédi\Desktop\Travail\Unity Projects\LudumDare39\LudumDare39\Assets\Scripts\BoardHandler.cs" line="66" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

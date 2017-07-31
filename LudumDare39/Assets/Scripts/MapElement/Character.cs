@@ -7,6 +7,8 @@ public class Character : MapElement {
 	override public bool isFree(){return false;}
 	override public bool isPushable(){return false;}
 
+	public LogicLink levelEndLink;
+
 
 	public bool Move (Position destination){
 		bool output = GetComponent<Movement> ().MoveTo (destination);
@@ -18,7 +20,14 @@ public class Character : MapElement {
 			}
 
 		}
+		if (p.Equals (levelEndLink.itemPosition)) {
+			NextLevel ();
+		}
 		return output;
+	}
+
+	private void NextLevel(){
+		GameHandler.instance.NextLevel ();
 	}
 
 	override public bool ProcessTurn (){

@@ -8,11 +8,21 @@ public class Movement : MonoBehaviour {
 	public bool MoveTo (Position i){
 		if (!getPosition ().IsNeighbor (i)) {
 			Debug.Log ("Nope! Deplacé à une position non adjascente");
-			return false; // Ce false mene a d'autres bugs. Fais gaffe!
-		} else if (BoardHandler.instance.FreeTile (i)) {
+			return false; // Ce false peut mener a d'autres bugs. Fais gaffe!
+		}
+
+		if (BoardHandler.instance.FreeTile (i)) {
+			//Dire au board Handler ou je suis
+			BoardHandler.instance.Move(this.GetComponentInParent<MapElement>(), i);
+
 			setPosition (i);
+
+			//AFFicher le deplacement
 			Position p = getPosition ();
 			transform.position = new Vector3 (p.j, -0.75f * p.i, p.i); //TODO Check if z ==0;
+			this.GetComponent<SpriteRenderer> ().sortingOrder = p.i + (int)(GetComponentInParent<Transform>().position.z);
+
+			//Dire au board Handler ou je suis
 			return true;
 		}
 		return false;
