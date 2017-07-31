@@ -217,16 +217,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114304639241106816, guid: 7c60843a77e7a4746a8481889b1b99f7,
-        type: 2}
-      propertyPath: mapElementPrefabs.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 114304639241106816, guid: 7c60843a77e7a4746a8481889b1b99f7,
-        type: 2}
-      propertyPath: tilesheets.Array.data[0].passages.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4224709546684722, guid: 7c60843a77e7a4746a8481889b1b99f7, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -259,85 +249,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114304639241106816, guid: 7c60843a77e7a4746a8481889b1b99f7,
-        type: 2}
-      propertyPath: mapElementPrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 1580063713427346, guid: 90229df2e00eef94280bc40d4a8e9f27,
-        type: 2}
-    - target: {fileID: 114304639241106816, guid: 7c60843a77e7a4746a8481889b1b99f7,
-        type: 2}
-      propertyPath: mapElementPrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 1716232989530298, guid: 2064e98ff55e00547b1c2c3bd870d387,
-        type: 2}
-    - target: {fileID: 114304639241106816, guid: 7c60843a77e7a4746a8481889b1b99f7,
-        type: 2}
-      propertyPath: mapElementPrefabs.Array.data[2]
-      value: 
-      objectReference: {fileID: 1750463812483144, guid: 4a66d2dd7d5b11d488470d6cfe519f6d,
-        type: 2}
-    - target: {fileID: 114304639241106816, guid: 7c60843a77e7a4746a8481889b1b99f7,
-        type: 2}
-      propertyPath: mapElementPrefabs.Array.data[3]
-      value: 
-      objectReference: {fileID: 1125237202439290, guid: 2ae925de17fb8754c971c52d44fb531a,
-        type: 2}
-    - target: {fileID: 114304639241106816, guid: 7c60843a77e7a4746a8481889b1b99f7,
-        type: 2}
-      propertyPath: mapElementPrefabs.Array.data[4]
-      value: 
-      objectReference: {fileID: 1742794965615642, guid: 923cd15602b47f44b8fd9eb2b8dd6c42,
-        type: 2}
-    - target: {fileID: 114304639241106816, guid: 7c60843a77e7a4746a8481889b1b99f7,
-        type: 2}
-      propertyPath: mapElementPrefabs.Array.data[5]
-      value: 
-      objectReference: {fileID: 1344597892606342, guid: c0c1d312589838d40bb0e4a6d6c919b8,
-        type: 2}
-    - target: {fileID: 114304639241106816, guid: 7c60843a77e7a4746a8481889b1b99f7,
-        type: 2}
-      propertyPath: mapElementPrefabs.Array.data[6]
-      value: 
-      objectReference: {fileID: 1344597892606342, guid: c0c1d312589838d40bb0e4a6d6c919b8,
-        type: 2}
-    - target: {fileID: 114304639241106816, guid: 7c60843a77e7a4746a8481889b1b99f7,
-        type: 2}
-      propertyPath: linkPrefab
-      value: 
-      objectReference: {fileID: 1669143262537422, guid: e2484a55c5a4108498f30373d18f49f6,
-        type: 2}
-    - target: {fileID: 114304639241106816, guid: 7c60843a77e7a4746a8481889b1b99f7,
-        type: 2}
-      propertyPath: tilesheets.Array.data[0].passages.Array.data[0]
-      value: 9
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7c60843a77e7a4746a8481889b1b99f7, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1663648506 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1216671145800592, guid: 7c60843a77e7a4746a8481889b1b99f7,
-    type: 2}
-  m_PrefabInternal: {fileID: 966912154}
---- !u!114 &1663648507 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114304639241106816, guid: 7c60843a77e7a4746a8481889b1b99f7,
-    type: 2}
-  m_PrefabInternal: {fileID: 966912154}
-  m_Script: {fileID: 11500000, guid: 5a7759c8d519f0740a35bc7255947c68, type: 3}
---- !u!114 &1663648509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1663648506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d616b092d7d2874db0e92098a3682a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mapLoader: {fileID: 1663648507}
 --- !u!1 &1851817759
 GameObject:
   m_ObjectHideFlags: 0
