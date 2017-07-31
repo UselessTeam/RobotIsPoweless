@@ -9,6 +9,12 @@ public class Character : MapElement {
 
 	public LogicLink levelEndLink;
 
+	public int energyMax = 4; //TODO Define this variable
+	public int energy;
+
+	void Start() {
+		energy = energyMax;
+	}
 
 	public bool Move (Position destination){
 		bool output = GetComponent<Movement> ().MoveTo (destination);
@@ -17,6 +23,7 @@ public class Character : MapElement {
 			Pushable element = BoardHandler.instance.PushableTile(destination);
 			if (! (element == null) ) {
 				element.GetComponent<Movement> ().MoveTo (getNextPos (element.p));
+				output = true;
 			}
 
 		}
@@ -31,7 +38,16 @@ public class Character : MapElement {
 	}
 
 	override public bool ProcessTurn (){
-		return Move (getNextPos (p));
+		if (Move (getNextPos (p))) {
+			energy -= 1;
+		}
+		if (BoardHandler.instance.IsThere("power", p)){
+			energy = energyMax;
+		}
+		if (energy == 0) {
+			//TODO GAMEOVER
+		}
+		return true;
 	}
 
 	Position getNextPos(Position p){
