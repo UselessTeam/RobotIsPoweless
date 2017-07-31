@@ -290,6 +290,5 @@ public class MapLoaderScript : MonoBehaviour {
 				NextContent ();
 			} while (xml.NodeType == XmlNodeType.EndElement);
 		}
-		Debug.Log (n);
 	}
 }

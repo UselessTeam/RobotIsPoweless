@@ -12,7 +12,7 @@ public class Movement : MonoBehaviour {
 		} else if (BoardHandler.instance.FreeTile (i)) {
 			setPosition (i);
 			Position p = getPosition ();
-			transform.position = new Vector3 (p.j, -0.75f * p.i, 0); //TODO Check if z ==0;
+			transform.position = new Vector3 (p.j, -0.75f * p.i, p.i); //TODO Check if z ==0;
 			return true;
 		}
 		return false;

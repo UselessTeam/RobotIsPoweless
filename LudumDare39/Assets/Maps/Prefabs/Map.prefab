@@ -35,6 +35,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4224709546684722}
   - component: {fileID: 114304639241106816}
+  - component: {fileID: 114329336007324942}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -167,6 +168,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a7759c8d519f0740a35bc7255947c68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapElementPrefabs:
+  - {fileID: 1580063713427346, guid: 90229df2e00eef94280bc40d4a8e9f27, type: 2}
+  - {fileID: 1716232989530298, guid: 2064e98ff55e00547b1c2c3bd870d387, type: 2}
+  - {fileID: 1750463812483144, guid: 4a66d2dd7d5b11d488470d6cfe519f6d, type: 2}
+  - {fileID: 1125237202439290, guid: 2ae925de17fb8754c971c52d44fb531a, type: 2}
+  - {fileID: 1742794965615642, guid: 923cd15602b47f44b8fd9eb2b8dd6c42, type: 2}
+  - {fileID: 1344597892606342, guid: c0c1d312589838d40bb0e4a6d6c919b8, type: 2}
+  - {fileID: 1344597892606342, guid: c0c1d312589838d40bb0e4a6d6c919b8, type: 2}
+  linkPrefab: {fileID: 1669143262537422, guid: e2484a55c5a4108498f30373d18f49f6, type: 2}
   basicTile: {fileID: 1758943846773050, guid: 4302b1059241e2549a56fe54bd6a446a, type: 2}
   width: 0
   height: 0
@@ -175,7 +185,7 @@ MonoBehaviour:
   - name: main
     start: 0
     blockings: 
-    passages: 
+    passages: 09000000
     sprites:
     - {fileID: 21300000, guid: 2d24aed27d8c5fd4a9d634703e541d8d, type: 3}
     - {fileID: 21300002, guid: 2d24aed27d8c5fd4a9d634703e541d8d, type: 3}
@@ -378,3 +388,15 @@ MonoBehaviour:
     - {fileID: 21300120, guid: c458745770873c04ba1dea94e5334c2c, type: 3}
     - {fileID: 21300122, guid: c458745770873c04ba1dea94e5334c2c, type: 3}
     - {fileID: 21300124, guid: c458745770873c04ba1dea94e5334c2c, type: 3}
+--- !u!114 &114329336007324942
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1216671145800592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d616b092d7d2874db0e92098a3682a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapLoader: {fileID: 114304639241106816}

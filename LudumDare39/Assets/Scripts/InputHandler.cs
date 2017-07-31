@@ -39,7 +39,6 @@ public class InputHandler : MonoBehaviour {
 		}
 
 		if (newTurn) {
-			print ("hi");
 			BoardHandler.instance.NewTurn();
 			newTurn = false;
 		}
