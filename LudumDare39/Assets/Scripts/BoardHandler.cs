@@ -101,6 +101,9 @@ public class BoardHandler : MonoBehaviour {
 	}
 		
 }
+public enum Direction {
+	SOUTH, WEST, NORTH, EAST, CENTER, ERROR
+}
 
 public struct Position {
 	public int i; 
@@ -111,12 +114,12 @@ public struct Position {
 		this.j = j;
 	}
 
-	public List<Position> Voisins (){
-		List<Position> output = new List<Position> ();
-		output.Add (new Position (i+1, j));
-		output.Add (new Position (i-1, j));
-		output.Add (new Position (i, j+1));
-		output.Add (new Position (i, j-1));
+	public Position[] Voisins (){
+		Position[] output = new Position[4];
+		output[(int)Direction.SOUTH] = (new Position (i+1, j));
+		output[(int)Direction.WEST] = (new Position (i, j-1));
+		output[(int)Direction.NORTH] = (new Position (i-1, j));
+		output[(int)Direction.EAST] = (new Position (i, j+1));
 		return output;
 	}
 
@@ -124,8 +127,59 @@ public struct Position {
 		return other.i==i && other.j==j;
 	}
 
-	public bool IsNeighbor( Position other){
-		return Voisins ().Contains (other);
+	public override bool Equals (object obj)
+	{
+		return false;
+	}
+
+	public override int GetHashCode ()
+	{
+		return base.GetHashCode ();
+	}
+
+	public static bool operator ==(Position a,  Position b){
+		return a.Equals (b);
+	}
+
+	public static bool operator !=(Position a,  Position b){
+		return !a.Equals (b);
+	}
+
+	public static Position[] directions = {
+		new Position (1, 0),
+		new Position (0, -1),
+		new Position (-1, 0),
+		new Position (0, 1),
+		new Position (0, 0)
+	};
+
+	public Direction ToDirection (Position other){
+		Position p = this - other;
+		if (p == directions [(int)Direction.NORTH]) {
+			return Direction.NORTH;
+		} else if (p == directions [(int)Direction.WEST]) {
+			return Direction.WEST;
+		} else if (p == directions[(int)Direction.SOUTH]) {
+			return Direction.NORTH;
+		} else if (p == directions [(int)Direction.EAST]) {
+			return Direction.WEST;
+		} else if (p == directions[(int)Direction.CENTER]) {
+			return Direction.CENTER;
+		} else {
+			return Direction.ERROR;
+		}
+	}
+
+	public int DistanceTo(Position other){
+		return Mathf.Abs(other.i - this.i) + Mathf.Abs(other.j - this.j);
+	}
+
+	public bool IsNeighbor(Position other){
+		return this.DistanceTo(other)==1;
+	}
+
+	public static Position operator -(Position a,  Position b){
+		return new Position (a.i - b.i, a.j - b.j);
 	}
 
 	public Position Add (Position other){
