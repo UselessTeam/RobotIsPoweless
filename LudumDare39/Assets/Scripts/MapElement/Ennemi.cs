@@ -10,23 +10,28 @@ public class Ennemi : MapElement {
 	List<Position> chemin;
 
 	void Start () {
+		MAJChemin ();
 	}
 
 	override public bool ProcessTurn (){
-		bool output = GetComponent<Movement> ().MoveTo (chemin [0]);
-		chemin.RemoveAt (0);
-		if (chemin [0].Equals(checkPoints[0]) ){
-			Position current = checkPoints [0];
-			checkPoints.RemoveAt (0);
-			checkPoints.Add (current);
-			MAJChemin (current, checkPoints [0]);
+		Movement debugMov = GetComponent<Movement> ();
+		bool output = true;
+		if (chemin != null) {
+			output = GetComponent<Movement> ().MoveTo (chemin [0]);
+			chemin.RemoveAt (0);
+			if (chemin [0].Equals (checkPoints [0])) {
+				Position current = checkPoints [0];
+				checkPoints.RemoveAt (0);
+				checkPoints.Add (current);
+				MAJChemin ();
+			}
 		}
 		return output;
 	}
 
-	List<Position> MAJChemin(Position p, Position objectif){
+	void MAJChemin(){
+		Position objectif = checkPoints [0];
 		List<Position> cheminOutput = new List<Position>(); 
-
 		int[,] d = BoardHandler.instance.GiveEmptyMap (1000);
 		int[,] visited = BoardHandler.instance.GiveEmptyMap (0);
 		Position s = BoardHandler.instance.size;
@@ -37,6 +42,7 @@ public class Ennemi : MapElement {
 		Q.Add(p);
 		while (Q.Count != 0) {
 			Position u = Q[0];
+			print (u.ToString ());
 			Q.Remove (u);
 			if (visited[u.i,u.j]==0) {
 				visited [u.i,u.j] = 1;
@@ -54,13 +60,15 @@ public class Ennemi : MapElement {
 								u = last [u.i, u.j];
 							}
 							print ("test Maj chemin " + cheminOutput.Count);
-							return cheminOutput;
+							chemin = cheminOutput;
+							return;
 						}
 					}
 				}
 			}
 		}
-		return null; //Bloké
+		Debug.Log ("Chemin Bloqué");
+		return; //Bloké TODO
 
 	}
 

@@ -52,18 +52,18 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Maps\MapLoaderScript.cs" />
-     <Compile Include="Assets\Scripts\BoardHandler\BoardHandler.cs" />
-     <Compile Include="Assets\Scripts\BoardHandler\InputHandler.cs" />
-     <Compile Include="Assets\Scripts\BoardHandler\MapElement.cs" />
-     <Compile Include="Assets\Scripts\BoardHandler\MapElement\Character.cs" />
-     <Compile Include="Assets\Scripts\BoardHandler\MapElement\Ennemi.cs" />
-     <Compile Include="Assets\Scripts\BoardHandler\MapElement\LogicButton.cs" />
-     <Compile Include="Assets\Scripts\BoardHandler\MapElement\LogicDoor.cs" />
-     <Compile Include="Assets\Scripts\BoardHandler\MapElement\LogicLink.cs" />
-     <Compile Include="Assets\Scripts\BoardHandler\MapElement\Power.cs" />
-     <Compile Include="Assets\Scripts\BoardHandler\MapElement\Pushable.cs" />
-     <Compile Include="Assets\Scripts\BoardHandler\MapElement\Wire.cs" />
-     <Compile Include="Assets\Scripts\BoardHandler\Movement.cs" />
+     <Compile Include="Assets\Scripts\BoardHandler.cs" />
+     <Compile Include="Assets\Scripts\InputHandler.cs" />
+     <Compile Include="Assets\Scripts\MapElement.cs" />
+     <Compile Include="Assets\Scripts\MapElement\Character.cs" />
+     <Compile Include="Assets\Scripts\MapElement\Ennemi.cs" />
+     <Compile Include="Assets\Scripts\MapElement\LogicButton.cs" />
+     <Compile Include="Assets\Scripts\MapElement\LogicDoor.cs" />
+     <Compile Include="Assets\Scripts\MapElement\LogicLink.cs" />
+     <Compile Include="Assets\Scripts\MapElement\Power.cs" />
+     <Compile Include="Assets\Scripts\MapElement\Pushable.cs" />
+     <Compile Include="Assets\Scripts\MapElement\Wire.cs" />
+     <Compile Include="Assets\Scripts\Movement.cs" />
      <Compile Include="Assets\Scripts\SoundHandler.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
