@@ -4,6 +4,38 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour {
 	public bool pushable;
+	public Animator animator;
+	private float cur;
+	private Position oldPos;
+
+	void Awake(){
+		animator = GetComponent<Animator> ();
+		cur = -1f;
+	}
+		
+	private void Going(Direction d){
+		if ((int)d >= 4) {
+			return;
+		}
+		animator.SetInteger ("direction", (int)d);
+		animator.SetTrigger ("moving");
+		oldPos = getPosition ();
+		cur = 0f;
+	}
+
+	void Update(){
+		Position p = getPosition ();
+		if (cur < 1f && cur >= 0f) {
+			if (cur == 0f) {
+				this.GetComponent<SpriteRenderer> ().sortingOrder = p.i + (int)(transform.parent.position.z) + 1;
+			}
+			transform.position = new Vector3 (oldPos.j * (1f - cur) + p.j * cur, -0.75f * (oldPos.i * (1f - cur) + p.i * cur), p.i);
+			cur += Time.deltaTime * 3f;
+		} else if (cur >= 1f) {
+			transform.position = new Vector3 (p.j, -0.75f * p.i, p.i);
+			cur = -1f;
+		}
+	}
 
 	public bool MoveTo (Position i){
 		if (!getPosition ().IsNeighbor (i)) {
@@ -15,12 +47,10 @@ public class Movement : MonoBehaviour {
 			//Dire au board Handler ou je suis
 			BoardHandler.instance.Move(this.GetComponentInParent<MapElement>(), i);
 
-			setPosition (i);
-
 			//AFFicher le deplacement
-			Position p = getPosition ();
-			transform.position = new Vector3 (p.j, -0.75f * p.i, p.i); //TODO Check if z ==0;
-			this.GetComponent<SpriteRenderer> ().sortingOrder = p.i + (int)(GetComponentInParent<Transform>().position.z);
+			Going (getPosition().ToDirection(i));
+
+			setPosition (i);
 
 			//Dire au board Handler ou je suis
 			return true;
@@ -33,18 +63,5 @@ public class Movement : MonoBehaviour {
 	}
 	private void setPosition (Position newP){
 		GetComponent<MapElement> ().p = newP;
-	}
-
-
-
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 }

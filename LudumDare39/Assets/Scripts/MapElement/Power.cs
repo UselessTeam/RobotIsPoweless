@@ -8,6 +8,12 @@ public class Power : MapElement {
 	override public bool isPushable(){return false;}
 
 	override public bool ProcessTurn (){
-		return true; //TODO
+		return true;
+	}
+
+	public override void SteppedOn(MapElement by){
+		if (typeof(Character).IsAssignableFrom(by.GetType ())) {
+			Character.instance.Recharge ();
+		}
 	}
 }

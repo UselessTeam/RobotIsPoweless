@@ -15,4 +15,6 @@ public abstract class MapElement : MonoBehaviour {
 	public abstract bool isFree ();
 	public abstract bool isPushable ();
 
+	public virtual void SteppedOn (MapElement by) {}
+	public virtual void SteppedOff (MapElement by) {}
 }

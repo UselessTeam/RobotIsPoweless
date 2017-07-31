@@ -5,7 +5,7 @@ using UnityEngine;
 public class LogicDoor : MapElement {
 
 	bool closed = false;
-	bool previousState = false;
+	public bool defaultState = false;
 
 	override public bool isFree(){return !closed;}
 	override public bool isPushable(){return true;}
@@ -13,9 +13,8 @@ public class LogicDoor : MapElement {
 	public LogicLink link;
 
 	override public bool ProcessTurn (){
-		closed = link.IsActive();
-		//it (previousState != closed) TODO afficher le changement d'etat Vas y quentin!!!
-		previousState = closed;
+		closed = (link.IsActive () != defaultState);
+
 		return true;
 	}
 

@@ -21,7 +21,7 @@ public class BoardHandler : MonoBehaviour {
 
 	void Awake() {
 		instance = this;
-		LoadLevel ("map_test1");
+		GameHandler.instance.LoadLevel ();
 	}
 
 	public void LoadLevel(string str){
@@ -50,7 +50,6 @@ public class BoardHandler : MonoBehaviour {
 		foreach (MapElement element in mapElements) {
 			element.ProcessTurn ();
 		}
-		//TODO
 	}
 
 	public bool FreeTile(Position u){ 
@@ -77,9 +76,19 @@ public class BoardHandler : MonoBehaviour {
 		}else if(!elementList.Contains(element)){
 			Debug.Log ("Probleme, l'objet à deplacer n'y etait pas");
 		}
-		elementList.Remove (element);
+		if (elementList.Count > 1) {
+			elementList.Remove (element);
+			foreach(MapElement other in elementList){
+				other.SteppedOff (element);
+			}
+		} else {
+			elementAt.Remove (element.p);
+		}
 		//THen ADD at the new position
 		if ( elementAt.TryGetValue(newPos , out elementList) ) {
+			foreach(MapElement other in elementList){
+				other.SteppedOn (element);
+			}
 			elementList.Add (element);
 		} else {
 			elementList = new List<MapElement> ();
@@ -159,10 +168,15 @@ public struct Position {
 		return other.i==i && other.j==j;
 	}
 
-	/*public override bool Equals (object obj)
+	public override bool Equals (object obj)
 	{
-		return false;
-	}*/
+		try{
+			Position other = (Position)obj;
+			return other.i==i && other.j==j;
+		} catch {
+			return false;
+		}
+	}
 
 	public override int GetHashCode ()
 	{
@@ -186,15 +200,15 @@ public struct Position {
 	};
 
 	public Direction ToDirection (Position other){
-		Position p = this - other;
+		Position p = other - this;
 		if (p == directions [(int)Direction.NORTH]) {
 			return Direction.NORTH;
 		} else if (p == directions [(int)Direction.WEST]) {
 			return Direction.WEST;
 		} else if (p == directions[(int)Direction.SOUTH]) {
-			return Direction.NORTH;
+			return Direction.SOUTH;
 		} else if (p == directions [(int)Direction.EAST]) {
-			return Direction.WEST;
+			return Direction.EAST;
 		} else if (p == directions[(int)Direction.CENTER]) {
 			return Direction.CENTER;
 		} else {

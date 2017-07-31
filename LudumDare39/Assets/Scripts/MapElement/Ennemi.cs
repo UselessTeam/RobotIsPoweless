@@ -9,7 +9,7 @@ public class Ennemi : MapElement {
 	public List<Position> checkPoints;
 	List<Position> chemin;
 
-	public int energyMax = 4; //TODO Define this variable
+	public int energyMax = 4;
 	public int energy;
 
 	void Start () {
@@ -19,7 +19,7 @@ public class Ennemi : MapElement {
 
 	override public bool ProcessTurn (){
 		//Movement debugMov = GetComponent<Movement> ();
-		if (energy > 0) {
+		if (energy > 0 && MAJChemin()) {
 			energy  -= 1;
 			bool output = true;
 			if (chemin != null) {
@@ -37,13 +37,13 @@ public class Ennemi : MapElement {
 			}
 			return output;
 		} else {
-			//TODO Eventuellement que faire si je n'ai plus d'energie?
+			//TODO Eventuellement que faire si je ne peut plus avancer
 			return false;
 		}
 
 	}
 
-	void MAJChemin(){
+	bool MAJChemin(){
 		Position objectif = checkPoints [0];
 		List<Position> cheminOutput = new List<Position>(); 
 		int[,] d = BoardHandler.instance.GiveEmptyMap (1000);
@@ -74,14 +74,14 @@ public class Ennemi : MapElement {
 							}
 							cheminOutput.Reverse ();
 							chemin = cheminOutput;
-							return;
+							return true;
 						}
 					}
 				}
 			}
 		}
 		Debug.Log ("Chemin Bloqué");
-		return; //Bloké TODO
+		return false; //Bloké
 
 	}
 

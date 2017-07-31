@@ -8,22 +8,23 @@ public class LogicButton: MapElement {
 	override public bool isPushable(){return true;}
 
 	public LogicLink link;
-
+	public int n = 0;
 
 	override public bool ProcessTurn (){
-		List<MapElement> elementList;
-		if (!BoardHandler.instance.elementAt.TryGetValue (p, out elementList)) {
-			Debug.Log ("Erreur, l'interupteur se trouve à un emplacement vide selon le dictionnaire 'elmentAt' ");
-			return false;
-		}
-		if (elementList.Count > 2) {
-			link.Activate ();
-		} else {
-			link.Desactivate ();
-		}
 		return true;
 	}
 
+	public override void SteppedOn(MapElement by){
+		n++;
+		if (n == 1) {
+			link.Change ();
+		}
+	}
 
-
+	public override void SteppedOff(MapElement by){
+		n--;
+		if (n == 0) {
+			link.Change ();
+		}
+	}
 }

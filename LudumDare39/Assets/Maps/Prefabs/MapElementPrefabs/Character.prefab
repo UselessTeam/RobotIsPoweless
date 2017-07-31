@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212248621722426832}
   - component: {fileID: 114786343724830400}
   - component: {fileID: 114141425673887142}
+  - component: {fileID: 95788682625999962}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -42,6 +43,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &95788682625999962
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1580063713427346}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a1c481ba24f4fd34596ed0b877e12a98, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114141425673887142
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -65,6 +83,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aba07ad95fd3d34ea8d37e64445d4ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelEndLink: {fileID: 0}
+  energyMax: 4
+  energy: 0
 --- !u!212 &212248621722426832
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -15,12 +15,15 @@ public class GameHandler : MonoBehaviour {
 	public SoundHandler soundHandler;
 
 	private int level = 0;
+	public int numberOfLevel;
 	public void NextLevel(){
 		level++;
-		BoardHandler.instance.LoadLevel ("map_level" + level);//TODO Donner un nom aux map de niveau
-	}//CECI EST UN TEST (cette methode est utilisée par character
+		LoadLevel ();
+	}
 
-
+	public void LoadLevel(){
+		BoardHandler.instance.LoadLevel ("level" + (level+1));
+	}
 
 
 

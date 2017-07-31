@@ -7,10 +7,16 @@ public class Character : MapElement {
 	override public bool isFree(){return false;}
 	override public bool isPushable(){return false;}
 
+	public static Character instance;
+
 	public LogicLink levelEndLink;
 
-	public int energyMax = 4; //TODO Define this variable
+	public int energyMax = 4;
 	public int energy;
+
+	void Awake(){
+		instance = this;
+	}
 
 	void Start() {
 		energy = energyMax;
@@ -27,9 +33,6 @@ public class Character : MapElement {
 			}
 
 		}
-		if (p.Equals (levelEndLink.itemPosition)) {
-			NextLevel ();
-		}
 		return output;
 	}
 
@@ -38,16 +41,16 @@ public class Character : MapElement {
 	}
 
 	override public bool ProcessTurn (){
-		if (Move (getNextPos (p))) {
+		if (energy <= 0) {
+			//TODO GAMEOVER
+		} else if (Move (getNextPos (p)) && InputHandler.instance.direction != Position.directions[(int)Direction.CENTER]) {
 			energy -= 1;
 		}
-		if (BoardHandler.instance.IsThere("power", p)){
-			energy = energyMax;
-		}
-		if (energy == 0) {
-			//TODO GAMEOVER
-		}
 		return true;
+	}
+
+	public void Recharge(){
+		energy = energyMax;
 	}
 
 	Position getNextPos(Position p){

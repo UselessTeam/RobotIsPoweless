@@ -150,7 +150,7 @@ public class MapLoaderScript : MonoBehaviour {
 		return true;
 	}
 		
-	//VERY IMPORTANT TODO 
+	//VERY IMPORTANT 
 
 
 	private GameObject CreateLink(Transform layer){
@@ -167,40 +167,48 @@ public class MapLoaderScript : MonoBehaviour {
 			tile = CreateTile (GetItem (gid).sprite, logicLink, i, j, 0, mapElementPrefabs [0]);
 			Character character = tile.GetComponent<Character>();
 			character.levelEndLink = logicLink.GetComponent<LogicLink> ();
+			if (properties.ContainsKey ("energy")) {
+				character.energyMax = int.Parse(properties ["energy"]);
+			}
 			break;
 		case "ennemy": //And ennemy
 			string[] strPositions = properties ["path"].Split ('-');
-			List<Position> checkPoints = new List<Position>();
+			List<Position> checkPoints = new List<Position> ();
 			for (int k = 0; k < strPositions.Length; k++) {
 				string[] strPair = strPositions [k].Substring (1, strPositions [k].Length - 2).Split (',');
-				checkPoints.Add( new Position (int.Parse (strPair [1]), int.Parse (strPair [0]))  );
+				checkPoints.Add (new Position (int.Parse (strPair [1]), int.Parse (strPair [0])));
 			}
 			tile = CreateTile (GetItem (gid).sprite, logicLink, i, j, 0, mapElementPrefabs [1]);
-			tile.GetComponent<Ennemi> ().checkPoints = checkPoints;
+			Ennemi e = tile.GetComponent<Ennemi> ();
+			e.checkPoints = checkPoints;
+			if (properties.ContainsKey ("energy")) {
+				e.energyMax = int.Parse(properties ["energy"]);
+			}
 			break;
 		case "power": //The thing that gives you back energy
 			tile = CreateTile (GetItem (gid).sprite, logicLink, i, j, 0, mapElementPrefabs [2]);
 			break;
 		case "button+": //Button  
-		case "button": //Button  //TODO Diff entre les boutons
+		case "button": //Button 
 			tile = CreateTile (GetItem (gid).sprite, logicLink, i, j, 0, mapElementPrefabs [3]);
 			LogicButton logicButton = tile.GetComponent<LogicButton>();
 			logicButton.link = logicLink.GetComponent<LogicLink> ();
 			break;
 		case "pillar": //The thing that comes out of the ground and acts like a wall when it's activated 
 			tile = CreateTile (GetItem (gid).sprite, logicLink, i, j, 0, mapElementPrefabs [4]);
-			LogicDoor logicPillar = tile.GetComponent<LogicDoor>();
+			LogicDoor logicPillar = tile.GetComponent<LogicDoor> ();
 			logicPillar.link = logicLink.GetComponent<LogicLink> ();
+			logicPillar.defaultState = properties.ContainsKey ("activated") ? bool.Parse (properties ["activated"]) : false;
 			break;
 		case "wire": //The blue thing on the ground
 			tile = CreateTile (GetItem (gid).sprite, logicLink, i, j, 0, mapElementPrefabs [5]);
 			Wire logicWire = tile.GetComponent<Wire>();
 			logicWire.link = logicLink.GetComponent<LogicLink> ();
 			break;
-		case "pushable": //The blue thing on the ground
+		case "pushable": //What is this ?
 			tile = CreateTile (GetItem (gid).sprite, logicLink, i, j, 0, mapElementPrefabs [6]);
 			break;
-		case "exit": //The blue thing on the ground
+		case "exit":
 			tile = CreateTile (GetItem (gid).sprite, logicLink, i, j, 0, mapElementPrefabs [7]);
 			LogicLink test = logicLink.GetComponent<LogicLink> ();
 			logicLink.GetComponent<LogicLink> ().itemPosition = new Position(i,j);

@@ -13,4 +13,9 @@ public class LevelEnd : MapElement {
 		return true;
 	}
 
+	public override void SteppedOn(MapElement by){
+		if (typeof(Character).IsAssignableFrom(by.GetType ())) {
+			GameHandler.instance.NextLevel ();
+		}
+	}
 }

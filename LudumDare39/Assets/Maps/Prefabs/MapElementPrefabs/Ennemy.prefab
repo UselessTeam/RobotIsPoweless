@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212167867534873876}
   - component: {fileID: 114552139406823888}
   - component: {fileID: 114282970007540628}
+  - component: {fileID: 95174803618347596}
   m_Layer: 0
   m_Name: Ennemy
   m_TagString: Untagged
@@ -42,6 +43,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &95174803618347596
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1716232989530298}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 18ea7bace881d0b44b9cac90c8c4d497, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114282970007540628
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -53,6 +71,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6949030a0442f66409bbe9ef3a54ea67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  energyMax: 4
+  energy: 0
 --- !u!114 &114552139406823888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -65,6 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pushable: 0
+  animator: {fileID: 0}
 --- !u!212 &212167867534873876
 SpriteRenderer:
   m_ObjectHideFlags: 1

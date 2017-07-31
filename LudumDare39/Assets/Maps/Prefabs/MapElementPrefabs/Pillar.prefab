@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4095604253349734}
   - component: {fileID: 212966627820225780}
   - component: {fileID: 114746502442015416}
+  - component: {fileID: 95139598924725708}
   m_Layer: 0
   m_Name: Pillar
   m_TagString: Untagged
@@ -41,6 +42,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &95139598924725708
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1742794965615642}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c3731299acb72c249b30bd40fb2fc93d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114746502442015416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -52,6 +70,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c005cbf0b4c1a4543b3d0ecdc9299a29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultState: 0
+  link: {fileID: 0}
 --- !u!212 &212966627820225780
 SpriteRenderer:
   m_ObjectHideFlags: 1
