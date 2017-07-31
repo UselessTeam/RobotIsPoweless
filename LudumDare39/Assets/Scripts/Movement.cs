@@ -11,6 +11,8 @@ public class Movement : MonoBehaviour {
 			return false; // Ce false mene a d'autres bugs. Fais gaffe!
 		} else if (BoardHandler.instance.FreeTile (i)) {
 			setPosition (i);
+			Position p = getPosition ();
+			transform.position = new Vector3 (p.j, -0.75f * p.i, 0); //TODO Check if z ==0;
 			return true;
 		}
 		return false;

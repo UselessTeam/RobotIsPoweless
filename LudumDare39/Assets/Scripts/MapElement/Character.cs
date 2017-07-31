@@ -27,6 +27,5 @@ public class Character : MapElement {
 
 	Position getNextPos(Position p){
 		return p.Add( InputHandler.instance.direction );
-		print (p.ToString ());
 	}
 }

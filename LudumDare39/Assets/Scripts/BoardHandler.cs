@@ -25,7 +25,6 @@ public class BoardHandler : MonoBehaviour {
 		size = new Position (mapLoader.height, mapLoader.width);
 		mapElements = mapLoader.entities.ToArray();
 		InitiateDictionary ();
-		//TODO MapElement
 	}
 
 	void Start(){

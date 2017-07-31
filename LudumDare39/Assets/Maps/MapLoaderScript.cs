@@ -111,10 +111,12 @@ public class MapLoaderScript : MonoBehaviour {
 		if (model == null) {
 			model = basicTile;
 		}
-		GameObject tile = Instantiate (model, new Vector3 (j, -0.75f * i, i + push), Quaternion.identity, parent); //Transofrm
-		SpriteRenderer sr = tile.GetComponent<SpriteRenderer> ();
-		sr.sprite = sprite;
-		sr.sortingOrder = i + (int)(parent.position.z) + push;
+		GameObject tile = Instantiate (model, new Vector3 (j, -0.75f * i, i + push), Quaternion.identity, parent); 
+		if (sprite != null) {
+			SpriteRenderer sr = tile.GetComponent<SpriteRenderer> ();
+			sr.sprite = sprite;
+			sr.sortingOrder = i + (int)(parent.position.z) + push;
+		}
 		return tile;
 	}
 
@@ -153,15 +155,16 @@ public class MapLoaderScript : MonoBehaviour {
 
 	private GameObject CreateLink(Transform layer){
 		GameObject link = CreateTile (null,layer,0,0,2,linkPrefab); //Initialize Logic Link
+		LogicLink logicLink = link.GetComponent<LogicLink> ();
 		return link;
 	}
 
 
-	private void CreateLogic(Transform layer, string type, int gid, int i, int j, Dictionary<string,string> properties){
+	private void CreateLogic(Transform logicLink, string type, int gid, int i, int j, Dictionary<string,string> properties){
 		GameObject tile;
 		switch (type) {
 		case "character":
-			tile = CreateTile (GetItem (gid).sprite, layer, i, j, 0, mapElementPrefabs [0]);
+			tile = CreateTile (GetItem (gid).sprite, logicLink, i, j, 0, mapElementPrefabs [0]);
 			break;
 		case "ennemy": //And ennemy
 			string[] strPositions = properties ["path"].Split ('-');
@@ -170,34 +173,34 @@ public class MapLoaderScript : MonoBehaviour {
 				string[] strPair = strPositions [k].Substring (1, strPositions [k].Length - 2).Split (',');
 				checkPoints.Add( new Position (int.Parse (strPair [1]), int.Parse (strPair [0]))  );
 			}
-			tile = CreateTile (GetItem (gid).sprite, layer, i, j, 0, mapElementPrefabs [1]);
+			tile = CreateTile (GetItem (gid).sprite, logicLink, i, j, 0, mapElementPrefabs [1]);
 			tile.GetComponent<Ennemi> ().checkPoints = checkPoints;
 			break;
 		case "power": //The thing that gives you back energy
-			tile = CreateTile (GetItem (gid).sprite, layer, i, j, 0, mapElementPrefabs [2]);
+			tile = CreateTile (GetItem (gid).sprite, logicLink, i, j, 0, mapElementPrefabs [2]);
 			break;
 		case "button+": //Button  
 		case "button": //Button  //TODO Diff entre les boutons
-			tile = CreateTile (GetItem (gid).sprite, layer, i, j, 0, mapElementPrefabs [3]);
+			tile = CreateTile (GetItem (gid).sprite, logicLink, i, j, 0, mapElementPrefabs [3]);
 			LogicButton logicButton = tile.GetComponent<LogicButton>();
-			logicButton.link = layer.GetComponent<LogicLink> ();
+			logicButton.link = logicLink.GetComponent<LogicLink> ();
 			break;
 		case "pillar": //The thing that comes out of the ground and acts like a wall when it's activated 
-			tile = CreateTile (GetItem (gid).sprite, layer, i, j, 0, mapElementPrefabs [4]);
+			tile = CreateTile (GetItem (gid).sprite, logicLink, i, j, 0, mapElementPrefabs [4]);
 			LogicDoor logicPillar = tile.GetComponent<LogicDoor>();
-			logicPillar.link = layer.GetComponent<LogicLink> ();
+			logicPillar.link = logicLink.GetComponent<LogicLink> ();
 			break;
 		case "wire": //The blue thing on the ground
-			tile = CreateTile (GetItem (gid).sprite, layer, i, j, 0, mapElementPrefabs [5]);
+			tile = CreateTile (GetItem (gid).sprite, logicLink, i, j, 0, mapElementPrefabs [5]);
 			Wire logicWire = tile.GetComponent<Wire>();
-			logicWire.link = layer.GetComponent<LogicLink> ();
+			logicWire.link = logicLink.GetComponent<LogicLink> ();
 			break;
 		case "pushable": //The blue thing on the ground
-			tile = CreateTile (GetItem (gid).sprite, layer, i, j, 0, mapElementPrefabs [6]);
+			tile = CreateTile (GetItem (gid).sprite, logicLink, i, j, 0, mapElementPrefabs [6]);
 			break;
 		case "default":
 		default:
-			tile = CreateTile (GetItem (gid).sprite, layer, i, j); //Initialize Logic Item
+			tile = CreateTile (GetItem (gid).sprite, logicLink, i, j); //Initialize Logic Item
 			Debug.Log( "Un objet est cree mais ne correspond à rien" );
 			break;
 		}
