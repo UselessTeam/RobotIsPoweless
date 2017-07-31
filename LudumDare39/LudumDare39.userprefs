@@ -1,23 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\BoardHandler.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MapElement\Character.cs">
     <Files>
-      <File FileName="Assets\Scripts\BoardHandler.cs" Line="64" Column="1" />
-      <File FileName="Assets\Scripts\Movement.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MapElement\Character.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MapElement\LogicLink.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MapElement\LogicButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MapElement\LogicDoor.cs" Line="1" Column="1" />
-      <File FileName="Assets\Maps\MapLoaderScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MapElement\Ennemi.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GameHandler\GameHandler.cs" Line="20" Column="95" />
+      <File FileName="Assets\Scripts\MapElement\Character.cs" Line="7" Column="44" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="C:\Users\Hédi\Desktop\Travail\Unity Projects\LudumDare39\LudumDare39\Assets\Scripts\BoardHandler\MapElement\Ennemi.cs" line="20" column="1" />
       <Breakpoint file="C:\Users\Hédi\Desktop\Travail\Unity Projects\LudumDare39\LudumDare39\Assets\Scripts\BoardHandler\MapElement\Ennemi.cs" line="21" column="1" />
-      <Breakpoint file="C:\Users\Hédi\Desktop\Travail\Unity Projects\LudumDare39\LudumDare39\Assets\Scripts\BoardHandler.cs" line="57" column="1" />
-      <Breakpoint file="C:\Users\Hédi\Desktop\Travail\Unity Projects\LudumDare39\LudumDare39\Assets\Scripts\BoardHandler.cs" line="66" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
