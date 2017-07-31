@@ -159,10 +159,10 @@ public struct Position {
 		return other.i==i && other.j==j;
 	}
 
-	public override bool Equals (object obj)
+	/*public override bool Equals (object obj)
 	{
 		return false;
-	}
+	}*/
 
 	public override int GetHashCode ()
 	{
