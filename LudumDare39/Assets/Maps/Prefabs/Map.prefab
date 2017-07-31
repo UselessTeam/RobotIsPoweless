@@ -175,7 +175,8 @@ MonoBehaviour:
   - {fileID: 1125237202439290, guid: 2ae925de17fb8754c971c52d44fb531a, type: 2}
   - {fileID: 1742794965615642, guid: 923cd15602b47f44b8fd9eb2b8dd6c42, type: 2}
   - {fileID: 1344597892606342, guid: c0c1d312589838d40bb0e4a6d6c919b8, type: 2}
-  - {fileID: 1344597892606342, guid: c0c1d312589838d40bb0e4a6d6c919b8, type: 2}
+  - {fileID: 1529448597924706, guid: 0419081079dbc8f45a1636ce52c6a162, type: 2}
+  - {fileID: 1702635730487676, guid: 4bcbf3b4c28fd2447a6c992c4efa754b, type: 2}
   linkPrefab: {fileID: 1669143262537422, guid: e2484a55c5a4108498f30373d18f49f6, type: 2}
   basicTile: {fileID: 1758943846773050, guid: 4302b1059241e2549a56fe54bd6a446a, type: 2}
   width: 0
@@ -400,3 +401,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapLoader: {fileID: 114304639241106816}
+  level: 0

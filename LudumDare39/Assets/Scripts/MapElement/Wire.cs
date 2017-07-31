@@ -5,7 +5,7 @@ using UnityEngine;
 public class Wire : MapElement {
 
 	override public bool isFree(){return true;}
-	override public bool isPushable(){return true;}
+	override public bool isPushable(){return false;}
 
 	public LogicLink link;
 

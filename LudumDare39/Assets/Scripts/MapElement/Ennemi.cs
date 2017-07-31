@@ -9,24 +9,38 @@ public class Ennemi : MapElement {
 	public List<Position> checkPoints;
 	List<Position> chemin;
 
+	public int energyMax = 4; //TODO Define this variable
+	public int energy;
+
 	void Start () {
 		MAJChemin ();
+		energy = energyMax;
 	}
 
 	override public bool ProcessTurn (){
-		Movement debugMov = GetComponent<Movement> ();
-		bool output = true;
-		if (chemin != null) {
-			output = GetComponent<Movement> ().MoveTo (chemin [0]);
-			chemin.RemoveAt (0);
-			if (chemin [0].Equals (checkPoints [0])) {
-				Position current = checkPoints [0];
-				checkPoints.RemoveAt (0);
-				checkPoints.Add (current);
-				MAJChemin ();
+		//Movement debugMov = GetComponent<Movement> ();
+		if (energy > 0) {
+			energy  -= 1;
+			bool output = true;
+			if (chemin != null) {
+				output = GetComponent<Movement> ().MoveTo (chemin [0]);
+				chemin.RemoveAt (0);
+				if (chemin [0].Equals (checkPoints [0])) {
+					Position current = checkPoints [0];
+					checkPoints.RemoveAt (0);
+					checkPoints.Add (current);
+					MAJChemin ();
+				}
 			}
+			if (BoardHandler.instance.IsThere("power", p)){
+				energy = energyMax;
+			}
+			return output;
+		} else {
+			//TODO Eventuellement que faire si je n'ai plus d'energie?
+			return false;
 		}
-		return output;
+
 	}
 
 	void MAJChemin(){

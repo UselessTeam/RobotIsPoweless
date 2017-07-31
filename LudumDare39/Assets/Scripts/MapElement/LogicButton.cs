@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LogicButton: MapElement {
 
-	override public bool isFree(){return false;}
+	override public bool isFree(){return true;}
 	override public bool isPushable(){return true;}
 
 	public LogicLink link;
@@ -16,7 +16,7 @@ public class LogicButton: MapElement {
 			Debug.Log ("Erreur, l'interupteur se trouve à un emplacement vide selon le dictionnaire 'elmentAt' ");
 			return false;
 		}
-		if (elementList.Count > 1) {
+		if (elementList.Count > 2) {
 			link.Activate ();
 		} else {
 			link.Desactivate ();

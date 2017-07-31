@@ -14,6 +14,22 @@ public class GameHandler : MonoBehaviour {
 	public string[] states;
 	public SoundHandler soundHandler;
 
+	private int level = 0;
+	public void NextLevel(){
+		level++;
+		BoardHandler.instance.LoadLevel ("map_level" + level);//TODO Donner un nom aux map de niveau
+	}//CECI EST UN TEST (cette methode est utilisée par character
+
+
+
+
+
+
+
+
+
+
+
 	void Awake(){
 		DontDestroyOnLoad (transform.gameObject);
 		if (m_Instance != null) {
