@@ -10,6 +10,7 @@ using System.Linq;
 public class MapLoaderScript : MonoBehaviour {
 
 	public GameObject[] mapElementPrefabs;
+	public GameObject linkPrefab;
 
 	[Serializable]
 	public class IntSet : List<int> {};
@@ -148,16 +149,19 @@ public class MapLoaderScript : MonoBehaviour {
 	}
 		
 	//VERY IMPORTANT TODO 
+
+
 	private GameObject CreateLink(Transform layer){
-		GameObject link = CreateTile (null,layer,0,0,2); //Initialize Logic Link
+		GameObject link = CreateTile (null,layer,0,0,2,linkPrefab); //Initialize Logic Link
 		return link;
 	}
 
-	private void CreateLogic(Transform logic, string type, int gid, int i, int j, Dictionary<string,string> properties){
+
+	private void CreateLogic(Transform layer, string type, int gid, int i, int j, Dictionary<string,string> properties){
 		GameObject tile;
 		switch (type) {
 		case "character":
-			tile = CreateTile (GetItem (gid).sprite, logic, i, j, 0, mapElementPrefabs [0]);
+			tile = CreateTile (GetItem (gid).sprite, layer, i, j, 0, mapElementPrefabs [0]);
 			break;
 		case "ennemy": //And ennemy
 			string[] strPositions = properties ["path"].Split ('-');
@@ -166,30 +170,34 @@ public class MapLoaderScript : MonoBehaviour {
 				string[] strPair = strPositions [k].Substring (1, strPositions [k].Length - 2).Split (',');
 				checkPoints.Add( new Position (int.Parse (strPair [1]), int.Parse (strPair [0]))  );
 			}
-			tile = CreateTile (GetItem (gid).sprite, logic, i, j, 0, mapElementPrefabs [1]);
+			tile = CreateTile (GetItem (gid).sprite, layer, i, j, 0, mapElementPrefabs [1]);
 			tile.GetComponent<Ennemi> ().checkPoints = checkPoints;
 			break;
 		case "power": //The thing that gives you back energy
-			tile = CreateTile (GetItem (gid).sprite, logic, i, j, 0, mapElementPrefabs [2]);
+			tile = CreateTile (GetItem (gid).sprite, layer, i, j, 0, mapElementPrefabs [2]);
 			break;
 		case "button+": //Button  
-			tile = CreateTile (GetItem (gid).sprite, logic, i, j, 0, mapElementPrefabs [3]);
-			break;
 		case "button": //Button  //TODO Diff entre les boutons
-			tile = CreateTile (GetItem (gid).sprite, logic, i, j, 0, mapElementPrefabs [3]);
+			tile = CreateTile (GetItem (gid).sprite, layer, i, j, 0, mapElementPrefabs [3]);
+			LogicButton logicButton = tile.GetComponent<LogicButton>();
+			logicButton.link = layer.GetComponent<LogicLink> ();
 			break;
 		case "pillar": //The thing that comes out of the ground and acts like a wall when it's activated 
-			tile = CreateTile (GetItem (gid).sprite, logic, i, j, 0, mapElementPrefabs [4]);
+			tile = CreateTile (GetItem (gid).sprite, layer, i, j, 0, mapElementPrefabs [4]);
+			LogicDoor logicPillar = tile.GetComponent<LogicDoor>();
+			logicPillar.link = layer.GetComponent<LogicLink> ();
 			break;
 		case "wire": //The blue thing on the ground
-			tile = CreateTile (GetItem (gid).sprite, logic, i, j, 0, mapElementPrefabs [5]);
+			tile = CreateTile (GetItem (gid).sprite, layer, i, j, 0, mapElementPrefabs [5]);
+			Wire logicWire = tile.GetComponent<Wire>();
+			logicWire.link = layer.GetComponent<LogicLink> ();
 			break;
 		case "pushable": //The blue thing on the ground
-			tile = CreateTile (GetItem (gid).sprite, logic, i, j, 0, mapElementPrefabs [6]);
+			tile = CreateTile (GetItem (gid).sprite, layer, i, j, 0, mapElementPrefabs [6]);
 			break;
 		case "default":
 		default:
-			tile = CreateTile (GetItem (gid).sprite, logic, i, j); //Initialize Logic Item
+			tile = CreateTile (GetItem (gid).sprite, layer, i, j); //Initialize Logic Item
 			Debug.Log( "Un objet est cree mais ne correspond à rien" );
 			break;
 		}

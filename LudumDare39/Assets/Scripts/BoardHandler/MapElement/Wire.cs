@@ -7,6 +7,7 @@ public class Wire : MapElement {
 	override public bool isFree(){return true;}
 	override public bool isPushable(){return true;}
 
+	public LogicLink link;
 
 	override public bool ProcessTurn (){
 		return true;
