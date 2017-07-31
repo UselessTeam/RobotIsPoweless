@@ -156,27 +156,46 @@ public class MapLoaderScript : MonoBehaviour {
 	private void CreateLogic(Transform logic, string type, int gid, int i, int j, Dictionary<string,string> properties){
 		GameObject tile;
 		switch (type) {
-		case "character": //Character
-			
+		case "character":
+			tile = CreateTile (GetItem (gid).sprite, logic, i, j, 0, mapElementPrefabs [0]);
+			break;
 		case "ennemy": //And ennemy
 			string[] strPositions = properties ["path"].Split ('-');
-			Position[] positions = new Position[strPositions.Length];
+			List<Position> checkPoints = new List<Position>();
 			for (int k = 0; k < strPositions.Length; k++) {
 				string[] strPair = strPositions [k].Substring (1, strPositions [k].Length - 2).Split (',');
-				positions [k] = new Position (int.Parse (strPair [1]), int.Parse (strPair [0]));
+				checkPoints.Add( new Position (int.Parse (strPair [1]), int.Parse (strPair [0]))  );
 			}
-			tile = CreateTile (GetItem (gid).sprite, logic, i, j);
+			tile = CreateTile (GetItem (gid).sprite, logic, i, j, 0, mapElementPrefabs [1]);
+			tile.GetComponent<Ennemi> ().checkPoints = checkPoints;
 			break;
 		case "power": //The thing that gives you back energy
-		case "button+": //Button
+			tile = CreateTile (GetItem (gid).sprite, logic, i, j, 0, mapElementPrefabs [2]);
+			break;
+		case "button+": //Button  
+			tile = CreateTile (GetItem (gid).sprite, logic, i, j, 0, mapElementPrefabs [3]);
+			break;
+		case "button": //Button  //TODO Diff entre les boutons
+			tile = CreateTile (GetItem (gid).sprite, logic, i, j, 0, mapElementPrefabs [3]);
+			break;
 		case "pillar": //The thing that comes out of the ground and acts like a wall when it's activated 
+			tile = CreateTile (GetItem (gid).sprite, logic, i, j, 0, mapElementPrefabs [4]);
+			break;
 		case "wire": //The blue thing on the ground
+			tile = CreateTile (GetItem (gid).sprite, logic, i, j, 0, mapElementPrefabs [5]);
+			break;
+		case "pushable": //The blue thing on the ground
+			tile = CreateTile (GetItem (gid).sprite, logic, i, j, 0, mapElementPrefabs [6]);
+			break;
 		case "default":
 		default:
 			tile = CreateTile (GetItem (gid).sprite, logic, i, j); //Initialize Logic Item
+			Debug.Log( "Un objet est cree mais ne correspond à rien" );
 			break;
 		}
 		tile.name = type + String.Format("({0},{1})",i,j);
+		MapElement logicElement = tile.GetComponent<MapElement>();
+		logicElement.p = new Position (i, j);
 		entities.Add ( tile.GetComponent<MapElement>());
 	}
 

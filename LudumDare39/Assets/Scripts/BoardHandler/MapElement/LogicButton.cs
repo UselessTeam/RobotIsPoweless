@@ -7,9 +7,8 @@ public class LogicButton: MapElement {
 	override public bool isFree(){return false;}
 	override public bool isPushable(){return true;}
 
-	void Awake(){
-	//	transform.parent.GetComponent<LogicLink> ().Start ();
-	}
+	public LogicLink link;
+
 
 	override public bool ProcessTurn (){
 		List<MapElement> elementList;
@@ -18,19 +17,13 @@ public class LogicButton: MapElement {
 			return false;
 		}
 		if (elementList.Count > 1) {
-			Activate ();
+			link.Activate ();
 		} else {
-			Desactivate ();
+			link.Desactivate ();
 		}
 		return true;
 	}
-	public LogicLink link;
 
-	bool Activate(){
-		return false; //TODO
-	}
-	bool Desactivate(){
-		return false; //TODO
-	}
+
 
 }

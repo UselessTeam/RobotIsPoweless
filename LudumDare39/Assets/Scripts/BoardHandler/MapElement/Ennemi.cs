@@ -6,7 +6,7 @@ public class Ennemi : MapElement {
 	override public bool isFree(){return false;}
 	override public bool isPushable(){return false;}
 
-	List<Position> checkPoints;//Please Initiate
+	public List<Position> checkPoints;
 	List<Position> chemin;
 
 	void Start () {

@@ -7,14 +7,14 @@ public class BoardHandler : MonoBehaviour {
 	static public BoardHandler instance;
 
 	public Position size;
-	private bool[,] topographyMap;//Please Initiate
+	private bool[,] topographyMap;
 //	public Pushable[,] pushableTiles;
 	public Dictionary<Position,List<MapElement>> elementAt;
 
 	public MapLoaderScript mapLoader;
 
 //	private Character character;
-	private MapElement[] mapElements;//Please Initiate
+	private MapElement[] mapElements;
 
 
 
@@ -24,6 +24,7 @@ public class BoardHandler : MonoBehaviour {
 		topographyMap = mapLoader.logicMap;
 		size = new Position (mapLoader.height, mapLoader.width);
 		mapElements = mapLoader.entities.ToArray();
+		InitiateDictionary ();
 		//TODO MapElement
 	}
 
@@ -31,7 +32,7 @@ public class BoardHandler : MonoBehaviour {
 
 	}
 
-	void InitiateDictionary(){//Please Initiate
+	void InitiateDictionary(){
 		elementAt = new Dictionary<Position,List<MapElement>> ();
 		foreach (MapElement element in mapElements) {
 			List<MapElement> elementList;
@@ -132,7 +133,7 @@ public struct Position {
 		return new Position (i + other.i, j + other.j);
 	}
 
-	public string toString () {
+	override public string ToString () {
 		return (i + " " + j);
 	}
 }

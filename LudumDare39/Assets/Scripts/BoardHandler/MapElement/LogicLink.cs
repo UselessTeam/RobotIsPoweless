@@ -5,8 +5,16 @@ using UnityEngine;
 public class LogicLink : MonoBehaviour {
 
 	bool isActive = false;
-	bool IsActive(){	return isActive;	}
+	public bool IsActive(){	return isActive;	}
 
+	public bool Activate(){
+		isActive = true;
+		return true; //TODO
+	}
+	public bool Desactivate(){
+		isActive = false;
+		return false; //TODO
+	}
 
 	void Start () {
 		
