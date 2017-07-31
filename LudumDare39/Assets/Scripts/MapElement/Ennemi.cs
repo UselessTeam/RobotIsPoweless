@@ -42,7 +42,6 @@ public class Ennemi : MapElement {
 		Q.Add(p);
 		while (Q.Count != 0) {
 			Position u = Q[0];
-			print (u.ToString ());
 			Q.Remove (u);
 			if (visited[u.i,u.j]==0) {
 				visited [u.i,u.j] = 1;
@@ -59,7 +58,7 @@ public class Ennemi : MapElement {
 								cheminOutput.Add (u);
 								u = last [u.i, u.j];
 							}
-							print ("test Maj chemin " + cheminOutput.Count);
+							cheminOutput.Reverse ();
 							chemin = cheminOutput;
 							return;
 						}
