@@ -56,12 +56,11 @@
      <Compile Include="Assets\Scripts\BoardHandler\InputHandler.cs" />
      <Compile Include="Assets\Scripts\BoardHandler\MapElement.cs" />
      <Compile Include="Assets\Scripts\BoardHandler\MapElement\Character.cs" />
-     <Compile Include="Assets\Scripts\BoardHandler\MapElement\Door.cs" />
      <Compile Include="Assets\Scripts\BoardHandler\MapElement\Ennemi.cs" />
-     <Compile Include="Assets\Scripts\BoardHandler\MapElement\Logic.cs" />
-     <Compile Include="Assets\Scripts\BoardHandler\MapElement\LogicHandler.cs" />
+     <Compile Include="Assets\Scripts\BoardHandler\MapElement\LogicButton.cs" />
+     <Compile Include="Assets\Scripts\BoardHandler\MapElement\LogicDoor.cs" />
+     <Compile Include="Assets\Scripts\BoardHandler\MapElement\LogicLink.cs" />
      <Compile Include="Assets\Scripts\BoardHandler\MapElement\Pushable.cs" />
-     <Compile Include="Assets\Scripts\BoardHandler\MapElement\Switch.cs" />
      <Compile Include="Assets\Scripts\BoardHandler\Movement.cs" />
      <Compile Include="Assets\Scripts\MapHandler\MapDictionary.cs" />
      <Compile Include="Assets\Scripts\MapHandler\MapHandler.cs" />

@@ -9,9 +9,7 @@ using System.Linq;
 
 public class MapLoaderScript : MonoBehaviour {
 
-	void Awake(){
-		Load ("map_test1");
-	}
+	public GameObject[] mapElementPrefabs;
 
 	[Serializable]
 	public class IntSet : List<int> {};
@@ -54,7 +52,7 @@ public class MapLoaderScript : MonoBehaviour {
 	public int height;
 	public bool[,] logicMap;
 	[HideInInspector]
-	public GameObject[] entities;
+	public List<MapElement> entities;
 
 	public TileSheet[] tilesheets;
 		
@@ -112,7 +110,7 @@ public class MapLoaderScript : MonoBehaviour {
 		if (model == null) {
 			model = basicTile;
 		}
-		GameObject tile = Instantiate (model, new Vector3 (j, -0.75f * i, i + push), Quaternion.identity, parent);
+		GameObject tile = Instantiate (model, new Vector3 (j, -0.75f * i, i + push), Quaternion.identity, parent); //Transofrm
 		SpriteRenderer sr = tile.GetComponent<SpriteRenderer> ();
 		sr.sprite = sprite;
 		sr.sortingOrder = i + (int)(parent.position.z) + push;
@@ -158,6 +156,8 @@ public class MapLoaderScript : MonoBehaviour {
 	private void CreateLogic(Transform logic, string type, int gid, int i, int j, Dictionary<string,string> properties){
 		GameObject tile;
 		switch (type) {
+		case "character": //Character
+			
 		case "ennemy": //And ennemy
 			string[] strPositions = properties ["path"].Split ('-');
 			Position[] positions = new Position[strPositions.Length];
@@ -177,6 +177,7 @@ public class MapLoaderScript : MonoBehaviour {
 			break;
 		}
 		tile.name = type + String.Format("({0},{1})",i,j);
+		entities.Add ( tile.GetComponent<MapElement>());
 	}
 
 	private void UpdateProperties(ref Dictionary<string,string> properties){

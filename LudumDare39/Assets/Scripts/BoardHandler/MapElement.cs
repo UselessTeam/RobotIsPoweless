@@ -14,4 +14,5 @@ public abstract class MapElement : MonoBehaviour {
 
 	public abstract bool isFree ();
 	public abstract bool isPushable ();
+
 }

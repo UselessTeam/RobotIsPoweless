@@ -7,9 +7,11 @@ public class BoardHandler : MonoBehaviour {
 	static public BoardHandler instance;
 
 	public Position size;
-	public bool[,] topographyMap;//Please Initiate
+	private bool[,] topographyMap;//Please Initiate
 //	public Pushable[,] pushableTiles;
 	public Dictionary<Position,List<MapElement>> elementAt;
+
+	public MapLoaderScript mapLoader;
 
 //	private Character character;
 	private MapElement[] mapElements;//Please Initiate
@@ -18,6 +20,11 @@ public class BoardHandler : MonoBehaviour {
 
 	void Awake() {
 		instance = this;
+		mapLoader.Load ("map_test1");
+		topographyMap = mapLoader.logicMap;
+		size = new Position (mapLoader.height, mapLoader.width);
+		mapElements = mapLoader.entities.ToArray();
+		//TODO MapElement
 	}
 
 	void Start(){
