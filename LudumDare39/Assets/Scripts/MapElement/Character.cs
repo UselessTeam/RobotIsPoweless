@@ -12,13 +12,28 @@ public class Character : MapElement {
 	public LogicLink levelEndLink;
 
 	public int energyMax = 4;
-	public int energy;
+	protected int energyReal;
+	public EnergyGUI energyGUI;
+	public int energy {
+		get{ return energyReal; }
+		set {
+			energyReal = value;
+			UpdateGUI ();
+		}
+	}
+
+	void UpdateGUI(){
+		if (energyGUI != null) {
+			energyGUI.Set (energy);
+		}
+	}
 
 	void Awake(){
 		instance = this;
 	}
 
 	void Start() {
+		UpdateGUI ();
 		energy = energyMax;
 	}
 

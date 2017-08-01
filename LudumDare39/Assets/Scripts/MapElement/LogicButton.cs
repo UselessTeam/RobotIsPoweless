@@ -10,6 +10,10 @@ public class LogicButton: MapElement {
 	public LogicLink link;
 	public int n = 0;
 
+	void Start(){
+		this.GetComponent<SpriteRenderer> ().sortingOrder++;
+	}
+
 	override public bool ProcessTurn (){
 		return true;
 	}
@@ -21,10 +25,11 @@ public class LogicButton: MapElement {
 		}
 	}
 
+	/*
 	public override void SteppedOff(MapElement by){
 		n--;
 		if (n == 0) {
 			link.Change ();
 		}
-	}
+	}*/
 }

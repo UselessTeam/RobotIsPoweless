@@ -51,6 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\GUI\CameraCenter.cs" />
+     <Compile Include="Assets\GUI\EnergyGUI.cs" />
      <Compile Include="Assets\Maps\MapLoaderScript.cs" />
      <Compile Include="Assets\Scripts\BoardHandler.cs" />
      <Compile Include="Assets\Scripts\GameHandler\GameHandler.cs" />

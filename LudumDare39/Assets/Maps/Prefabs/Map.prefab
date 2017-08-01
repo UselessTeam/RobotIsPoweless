@@ -402,3 +402,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapLoader: {fileID: 114304639241106816}
   level: 0
+  energies:
+  - {fileID: 21300000, guid: 73331e2b4f868294bb70527cb43454e7, type: 3}
+  - {fileID: 21300002, guid: 73331e2b4f868294bb70527cb43454e7, type: 3}
+  - {fileID: 21300004, guid: 73331e2b4f868294bb70527cb43454e7, type: 3}
+  - {fileID: 21300006, guid: 73331e2b4f868294bb70527cb43454e7, type: 3}
+  - {fileID: 21300008, guid: 73331e2b4f868294bb70527cb43454e7, type: 3}
+  - {fileID: 21300010, guid: 73331e2b4f868294bb70527cb43454e7, type: 3}
+  - {fileID: 21300012, guid: 73331e2b4f868294bb70527cb43454e7, type: 3}
+  - {fileID: 21300014, guid: 73331e2b4f868294bb70527cb43454e7, type: 3}
+  - {fileID: 21300016, guid: 73331e2b4f868294bb70527cb43454e7, type: 3}
+  - {fileID: 21300018, guid: 73331e2b4f868294bb70527cb43454e7, type: 3}
+  - {fileID: 21300020, guid: 73331e2b4f868294bb70527cb43454e7, type: 3}
+  - {fileID: 21300022, guid: 73331e2b4f868294bb70527cb43454e7, type: 3}
+  - {fileID: 21300024, guid: 73331e2b4f868294bb70527cb43454e7, type: 3}
+  - {fileID: 21300026, guid: 73331e2b4f868294bb70527cb43454e7, type: 3}
+  - {fileID: 21300028, guid: 73331e2b4f868294bb70527cb43454e7, type: 3}
+  - {fileID: 21300030, guid: 73331e2b4f868294bb70527cb43454e7, type: 3}

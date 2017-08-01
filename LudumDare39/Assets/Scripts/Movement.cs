@@ -27,11 +27,12 @@ public class Movement : MonoBehaviour {
 		Position p = getPosition ();
 		if (cur < 1f && cur >= 0f) {
 			if (cur == 0f) {
-				this.GetComponent<SpriteRenderer> ().sortingOrder = p.i + (int)(transform.parent.position.z) + 1;
+				this.GetComponent<SpriteRenderer> ().sortingOrder = 4*(Mathf.Max(oldPos.i,p.i) + (int)(transform.parent.position.z)) + 2;
 			}
 			transform.position = new Vector3 (oldPos.j * (1f - cur) + p.j * cur, -0.75f * (oldPos.i * (1f - cur) + p.i * cur), p.i);
 			cur += Time.deltaTime * 3f;
 		} else if (cur >= 1f) {
+			this.GetComponent<SpriteRenderer> ().sortingOrder = 4*(p.i + (int)(transform.parent.position.z)) + 1;
 			transform.position = new Vector3 (p.j, -0.75f * p.i, p.i);
 			cur = -1f;
 		}

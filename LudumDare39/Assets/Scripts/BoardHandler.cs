@@ -18,6 +18,7 @@ public class BoardHandler : MonoBehaviour {
 
 	public int level = 0;
 
+	public Sprite[] energies; //DIRTY
 
 	void Awake() {
 		instance = this;

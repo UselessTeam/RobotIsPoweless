@@ -145,7 +145,7 @@
  <objectgroup name="Misc">
   <object id="81" type="character" gid="36" x="96" y="480" width="32" height="24">
    <properties>
-    <property name="energy" type="int" value="12"/>
+    <property name="energy" type="int" value="13"/>
    </properties>
   </object>
   <object id="85" type="exit" gid="33" x="608" y="96" width="32" height="24"/>

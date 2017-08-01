@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class LogicDoor : MapElement {
 
-	bool closed = false;
+	bool activated = false;
 	public bool defaultState = false;
 
-	override public bool isFree(){return !closed;}
+	override public bool isFree(){return !activated;}
 	override public bool isPushable(){return true;}
 
 	public LogicLink link;
 
-	override public bool ProcessTurn (){
-		closed = (link.IsActive () != defaultState);
+	void Start(){
+		this.GetComponent<SpriteRenderer> ().sortingOrder++;
+		ProcessTurn ();
+	}
 
+	override public bool ProcessTurn (){
+		bool newState = (link.IsActive () != defaultState);
+		if (activated != newState) {
+			activated = newState;
+			GetComponent<Animator> ().SetBool ("activated", activated);
+		}
 		return true;
 	}
 

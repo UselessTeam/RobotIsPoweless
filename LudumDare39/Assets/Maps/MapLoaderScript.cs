@@ -115,7 +115,7 @@ public class MapLoaderScript : MonoBehaviour {
 		if (sprite != null) {
 			SpriteRenderer sr = tile.GetComponent<SpriteRenderer> ();
 			sr.sprite = sprite;
-			sr.sortingOrder = i + (int)(parent.position.z) + push;
+			sr.sortingOrder = 4*(i + (int)(parent.position.z) + push);
 		}
 		return tile;
 	}
