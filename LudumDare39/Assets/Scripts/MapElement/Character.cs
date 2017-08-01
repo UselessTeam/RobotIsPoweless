@@ -48,6 +48,8 @@ public class Character : MapElement {
 			}
 
 		}
+		if (output)
+			BoardHandler.instance.NewTurn();
 		return output;
 	}
 

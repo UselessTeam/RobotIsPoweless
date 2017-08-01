@@ -17,8 +17,8 @@ public class BoardHandler : MonoBehaviour {
 	private MapElement[] mapElements;
 
 	public int level = 0;
-
-	public Sprite[] energies; //DIRTY
+	public Sprite[] energies;
+	string currentLevel;
 
 	void Awake() {
 		instance = this;
@@ -26,11 +26,18 @@ public class BoardHandler : MonoBehaviour {
 	}
 
 	public void LoadLevel(string str){
+		if (str == null)
+			str = currentLevel;
+		if (str == null){
+			Debug.Log ("Error, you're loading a null Level");
+		}
 		mapLoader.Load (str);
 		topographyMap = mapLoader.logicMap;
 		size = new Position (mapLoader.height, mapLoader.width);
+		mapElements = null;
 		mapElements = mapLoader.entities.ToArray ();
 		InitiateDictionary ();
+		currentLevel = str;
 	}
 
 	void InitiateDictionary(){
@@ -49,7 +56,8 @@ public class BoardHandler : MonoBehaviour {
 
 	public void NewTurn(){
 		foreach (MapElement element in mapElements) {
-			element.ProcessTurn ();
+			if (!element.name.Contains("character"))
+				element.ProcessTurn ();
 		}
 	}
 

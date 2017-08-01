@@ -39,8 +39,11 @@ public class InputHandler : MonoBehaviour {
 		}
 
 		if (newTurn) {
-			BoardHandler.instance.NewTurn();
+			Character.instance.ProcessTurn ();
 			newTurn = false;
+		}
+		if (Input.GetButtonDown ("Restart")) {
+			BoardHandler.instance.LoadLevel (null);
 		}
 
 	}
